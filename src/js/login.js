@@ -15,10 +15,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         const result = await response.json();
   
         if (response.ok) {
-            // Debugging: periksa data yang diterima dari server
             console.log('Login successful:', result);
-  
-            // Memastikan `userId` dan `userName` ada sebelum menggunakannya
             if (result.userId && result.userName) {
                 localStorage.setItem('userId', result.userId);
                 localStorage.setItem('userName', result.userName);
