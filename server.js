@@ -1,3 +1,4 @@
+//TONG DIOTAKATIK!
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const cors = require('cors');
@@ -16,9 +17,9 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public')); // Menyajikan file statis dari folder public
+app.use(express.static('public')); 
 
-// Endpoint Registrasi Pengguna
+// Endpoint Registrasi
 app.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -27,7 +28,6 @@ app.post('/register', async (req, res) => {
     }
 
     try {
-        // Periksa apakah email sudah terdaftar
         const { data: existingUser, error: existingUserError } = await supabase
             .from('users')
             .select('*')
@@ -37,11 +37,9 @@ app.post('/register', async (req, res) => {
         if (existingUser) {
             return res.status(409).json({ error: 'Email already registered.' });
         }
-
-        // Hash password sebelum disimpan
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Masukkan pengguna baru ke database
+        // input ke db
         const { data: user, error } = await supabase
             .from('users')
             .insert([{ name, email, password: hashedPassword }])
@@ -59,7 +57,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// Endpoint Login Pengguna
+// Endpoint Login 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -68,7 +66,6 @@ app.post('/login', async (req, res) => {
     }
 
     try {
-        // Cari pengguna berdasarkan email
         const { data: user, error } = await supabase
             .from('users')
             .select('*')
@@ -79,7 +76,6 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials.' });
         }
 
-        // Periksa apakah password benar
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(401).json({ error: 'Invalid credentials.' });
