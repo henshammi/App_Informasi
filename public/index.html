@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Web Project</title>
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <h1>cobain doang ini babi</h1>
-    <p>alba kntl</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Welcome!</h2>
+        <p>User ID: <span id="userId"></span></p>
+        <p>Name: <span id="userName"></span></p>
+    </div>
 
-    <script src="js/scripts.js"></script>
-  </body>
+    <script>
+        const userId = localStorage.getItem('userId');
+        const userName = localStorage.getItem('userName');
+        document.getElementById('userId').textContent = userId;
+        document.getElementById('userName').textContent = userName;
+    </script>
+</body>
 </html>
