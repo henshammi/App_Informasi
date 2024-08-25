@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/dashboard.css" />
     <title>Dashboard</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="dashboard-container">
-        <h2>Welcome!</h2>
-        <p>User ID: <span id="userId"></span></p>
-        <p>Name: <span id="userName"></span></p>
+      <h2>Welcome!</h2>
+      <p>User ID: <span id="userId"></span></p>
+      <p>Name: <span id="userName"></span></p>
+      <h2>Daftar Bahan Pokok</h2>
+      <table id="bahanTable">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama Bahan Pokok</th>
+            <th>Harga Bahan Pokok</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data akan dimuat di sini melalui JavaScript -->
+        </tbody>
+      </table>
     </div>
 
     <script>
-        const userId = localStorage.getItem('userId');
-        const userName = localStorage.getItem('userName');
-        document.getElementById('userId').textContent = userId;
-        document.getElementById('userName').textContent = userName;
+      const userId = localStorage.getItem("userId");
+      const userName = localStorage.getItem("userName");
+      document.getElementById("userId").textContent = userId;
+      document.getElementById("userName").textContent = userName;
     </script>
-</body>
+
+    <script src="../src/js/dashboard.js"></script>
+  </body>
 </html>
