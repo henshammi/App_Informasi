@@ -5,37 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Dashboard</title>
+
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="main-container">
-      <div class="side-menu">
-        <div class="dashboard-container">
-          <h2>Welcome!</h2>
-          <p>User ID: <span id="userId"></span></p>
-          <p>Name: <span id="userName"></span></p>
-        </div>
-        <nav class="menu">
-          <button onclick="location.href='index.html'">Dashboard</button>
-          <button onclick="location.href='inputData.html'">Input Data</button>
-        </nav>
-      </div>
+    <!-- sidebar -->
+    <div class="sidebar">
+      <div class="logo-details">
+        <i class="bx bx-data icon"></i>
 
-      <div class="table-container">
-        <h2>Daftar Bahan Pokok</h2>
-        <table id="bahanTable">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama Bahan Pokok</th>
-              <th>Harga Bahan Pokok</th>
-              <th>Tanggal</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="logo_name">Fadil APP</div>
+        <i class="bx bx-menu" id="btn"></i>
       </div>
+      <ul class="nav-list">
+        <li>
+          <a href="#">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-user"></i>
+            <span class="links_name">Profile</span>
+          </a>
+          <span class="tooltip">Profile</span>
+        </li>
+        <li>
+          <a href="inputData.html">
+            <i class="bx bx-chat"></i>
+            <span class="links_name">Input Bahan Pokok</span>
+          </a>
+          <span class="tooltip">Input Bahan Pokok</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <!-- fotonya tar disini -->
+            <img src="./assets/profile.jpg" alt="profileImg" />
+            <div class="name_job">
+              <div class="name"><span id="userId"></span></div>
+              <div class="job"><span id="userName"></span></div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </li>
+      </ul>
     </div>
+
+    <section class="home-section">
+      <div class="container-box">
+        <div class="text">Daftar Bahan Pokok</div>
+
+        <!-- tabel -->
+        <div class="table-container">
+          <table id="bahanTable">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Bahan Pokok</th>
+                <th>Harga Bahan Pokok</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
 
     <script>
       const userId = localStorage.getItem("userId");
@@ -45,5 +86,6 @@
     </script>
 
     <script src="../src/js/dashboard.js"></script>
+    <script src="../src/js/navbar.js"></script>
   </body>
 </html>
