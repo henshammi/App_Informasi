@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/inputData.css" />
+    <title>Input Bahan Pokok</title>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Input Data Bahan Pokok</h2>
+      <form id="bahanForm">
+        <label for="nama">Nama Bahan Pokok:</label>
+        <input type="text" id="nama" name="nama" required />
+
+        <label for="harga">Harga Bahan Pokok:</label>
+        <input type="number" id="harga" name="harga" required />
+
+        <label for="tanggal">Tanggal:</label>
+        <input type="date" id="tanggal" name="tanggal" required />
+
+        <label for="gambar">Gambar Bahan Pokok:</label>
+        <input
+          type="file"
+          id="gambar"
+          name="gambar"
+          accept="image/*"
+          required
+        />
+
+        <button type="submit">Tambah</button>
+      </form>
+      <p id="message"></p>
+      <img id="preview" style="display: none; margin-top: 20px" />
+    </div>
+
+    <script src="../src/js/inputData.js"></script>
+  </body>
+</html>
