@@ -2,7 +2,7 @@ const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');  // Untuk hashing password
+const bcrypt = require('bcrypt'); 
 require('dotenv').config();
 
 // Konfigurasi Supabase
@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public')); // Menyajikan file statis dari folder public
+app.use(express.static('public'));
 
 // Endpoint Registrasi Pengguna
 app.post('/register', async (req, res) => {
