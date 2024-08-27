@@ -46,7 +46,7 @@ button:hover {
   color: #11101d;
   font-size: 25px;
   font-weight: bold;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .container-box2 {
@@ -55,5 +55,5 @@ button:hover {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: calc(100% - 78px);
-  margin-bottom: 250px;
+  margin-bottom: 200px;
 }
