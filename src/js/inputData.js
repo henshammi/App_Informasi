@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gambarInput = document.getElementById("gambar");
 
   form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Mencegah form dari submit secara default
+    event.preventDefault();
 
     const nama = document.getElementById("nama").value;
     const harga = document.getElementById("harga").value;
@@ -13,12 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const gambar = gambarInput.files[0];
 
     if (nama && harga && tanggal && gambar) {
-      // Simulasi penyimpanan data (misalnya, menambahkan ke tabel)
-      // Untuk demonstrasi, kita hanya menampilkan pesan
       message.textContent = `Data berhasil ditambahkan: ${nama}, Rp.${harga}, ${tanggal}`;
       message.style.color = "green";
 
-      // Reset form
       form.reset();
       preview.style.display = "none";
     } else {
