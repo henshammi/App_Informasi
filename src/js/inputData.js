@@ -7,12 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nama = document.getElementById("nama").value;
-    const harga = document.getElementById("harga").value;
+    const nama = document.getElementById("nama").value.trim();
+    const harga = document.getElementById("harga").value.trim();
     const tanggal = document.getElementById("tanggal").value;
     const gambar = gambarInput.files[0];
 
     if (nama && harga && tanggal && gambar) {
+      if (isNaN(harga) || harga <= 0) {
+        message.textContent = "Harga harus berupa angka positif!";
+        message.style.color = "red";
+        return;
+      }
+
       message.textContent = `Data berhasil ditambahkan: ${nama}, Rp.${harga}, ${tanggal}`;
       message.style.color = "green";
 

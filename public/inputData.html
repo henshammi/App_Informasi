@@ -87,6 +87,12 @@
       </div>
     </section>
 
+    <script>
+      const userId = localStorage.getItem("userId");
+      const userName = localStorage.getItem("userName");
+      document.getElementById("userId").textContent = userId;
+      document.getElementById("userName").textContent = userName;
+    </script>
     <script src="../src/js/inputData.js"></script>
     <script src="../src/js/navbar.js"></script>
   </body>
