@@ -1,3 +1,4 @@
+//TONG DIOTAKATIK!
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const cors = require('cors');
@@ -16,9 +17,12 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static('public')); 
+app.use(cors({
+    origin: '*', 
+}));
 
-// Endpoint Registrasi Pengguna
+// Endpoint Registrasi
 app.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -27,7 +31,6 @@ app.post('/register', async (req, res) => {
     }
 
     try {
-        // Periksa apakah email sudah terdaftar
         const { data: existingUser, error: existingUserError } = await supabase
             .from('users')
             .select('*')
@@ -37,11 +40,9 @@ app.post('/register', async (req, res) => {
         if (existingUser) {
             return res.status(409).json({ error: 'Email already registered.' });
         }
-
-        // Hash password sebelum disimpan
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Masukkan pengguna baru ke database
+        // input ke db
         const { data: user, error } = await supabase
             .from('users')
             .insert([{ name, email, password: hashedPassword }])
@@ -59,7 +60,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// Endpoint Login Pengguna
+// Endpoint Login 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -68,7 +69,6 @@ app.post('/login', async (req, res) => {
     }
 
     try {
-        // Cari pengguna berdasarkan email
         const { data: user, error } = await supabase
             .from('users')
             .select('*')
@@ -79,7 +79,6 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials.' });
         }
 
-        // Periksa apakah password benar
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(401).json({ error: 'Invalid credentials.' });
@@ -91,6 +90,86 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Internal server error.' });
     }
 });
+
+// Endpoint untuk mendapatkan daftar items
+app.get('/items', async (req, res) => {
+    try {
+        const { data: items, error } = await supabase
+            .from('items')
+            .select('*');
+
+        if (error) {
+            console.error('Error fetching items:', error.message);
+            return res.status(500).json({ error: 'Error fetching items.' });
+        }
+
+        console.log('Items fetched:', items); // Log data untuk verifikasi
+
+        res.status(200).json(items);
+    } catch (err) {
+        console.error('Internal server error:', err);
+        res.status(500).json({ error: 'Internal server error.' });
+    }
+});
+
+
+// Endpoint untuk menghapus item berdasarkan ID
+app.delete('/items/:id', async (req, res) => {
+    const itemId = req.params.id;
+    
+    console.log('Received DELETE request for item ID:', itemId); // Tambahkan log ini
+
+    try {
+        // Log request and Supabase query
+        console.log('Attempting to delete item from Supabase');
+        
+        const { data, error } = await supabase
+            .from('items')
+            .delete()
+            .eq('id', itemId);
+
+        console.log('Supabase delete response:', { data, error }); // Tambahkan log ini
+
+        if (error) {
+            console.error('Error deleting item from Supabase:', error.message);
+            return res.status(500).json({ error: 'Error deleting item.' });
+        }
+
+        res.status(200).json({ message: 'Item deleted successfully' });
+    } catch (err) {
+        console.error('Internal server error:', err);
+        res.status(500).json({ error: 'Internal server error.' });
+    }
+});
+
+
+
+// Endpoint untuk menambahkan bahan pokok
+app.post('/add-bahan', async (req, res) => {
+    const { nama, harga, tanggal } = req.body;
+
+    if (!nama || !harga || !tanggal) {
+        return res.status(400).json({ error: 'All fields are required.' });
+    }
+
+    try {
+        const { data, error } = await supabase
+            .from('items') 
+            .insert([{ name: nama, harga, tanggal }]);
+
+        if (error) {
+            console.error('Error inserting data:', error.message);
+            return res.status(500).json({ error: 'Error inserting data.' });
+        }
+
+        res.status(201).json({ message: 'Data successfully added.', data });
+    } catch (err) {
+        console.error('Internal server error:', err);
+        res.status(500).json({ error: 'Internal server error.' });
+    }
+});
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
