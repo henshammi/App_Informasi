@@ -27,7 +27,7 @@
           <span class="tooltip">Dashboard</span>
         </li>
         <li>
-          <a href="#">
+          <a href="profile.html">
             <i class="bx bx-user"></i>
             <span class="links_name">Profile</span>
           </a>
@@ -77,13 +77,14 @@
       </div>
     </section>
     <div id="notification" class="notification" style="display: none"></div>
+
     <script>
       const userId = localStorage.getItem("userId");
       const userName = localStorage.getItem("userName");
       document.getElementById("userId").textContent = userId;
       document.getElementById("userName").textContent = userName;
     </script>
-
+    <script src="../src/js/logout.js"></script>
     <script src="../src/js/dashboard.js"></script>
     <script src="../src/js/navbar.js"></script>
   </body>

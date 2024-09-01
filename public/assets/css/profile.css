@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 20;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #e2e2e2, #ffffff);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+.profile-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-size: cover;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 50%;
+  max-height: 70%;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #ffffff40;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  background: #ffffff;
+  justify-content: center;
+  gap: 20px;
+}
+
+.image {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.image .profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.data h2 {
+  font-size: 33px;
+  font-weight: 600;
+  color: #4a90e2;
+}
+
+.data span {
+  font-size: 18px;
+  color: #777;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.row .info {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.row .info h3 {
+  font-size: 16px;
+  color: #333;
+}
+
+.row .info span {
+  display: block;
+  font-size: 18px;
+  color: #4a90e2;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.buttons .btn {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 20px;
+  padding: 8px 25px;
+  border-radius: 25px;
+  font-size: 18px;
+  white-space: nowrap;
+  background: linear-gradient(to left, #33ccff 0%, #ff99cc 100%);
+}
+
+.buttons .btn:hover {
+  box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .row .info {
+    width: 100%;
+  }
+}
