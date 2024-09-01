@@ -3,16 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/dashboard.css" />
-    <link rel="stylesheet" href="assets/css/profile.css" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Profile Page</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/profile.css" />
+    <link rel="stylesheet" href="./assets/css/dashboard.css" />
     <link
-      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
       rel="stylesheet"
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
     />
-    <title>Profile</title>
   </head>
   <body>
-    <!-- sidebar -->
+    <!-- Sidebar -->
     <div class="sidebar">
       <div class="logo-details">
         <i class="bx bx-data icon"></i>
@@ -21,18 +23,16 @@
       </div>
       <ul class="nav-list">
         <li>
-          <a href="index.html">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Dashboard</span>
-          </a>
-          <span class="tooltip">Dashboard</span>
+          <a href="index.html"
+            ><i class="bx bx-grid-alt"></i
+            ><span class="links_name">Dashboard</span></a
+          ><span class="tooltip">Dashboard</span>
         </li>
         <li>
-          <a href="profile.html">
-            <i class="bx bx-user"></i>
-            <span class="links_name">Profile</span>
-          </a>
-          <span class="tooltip">Profile</span>
+          <a href="profile.html"
+            ><i class="bx bx-user"></i
+            ><span class="links_name">Profile</span></a
+          ><span class="tooltip">Profile</span>
         </li>
         <li class="profile">
           <div class="profile-details">
@@ -46,32 +46,47 @@
           <span class="tooltip-logout">Logout</span>
         </li>
         <li>
-          <a href="inputData.html">
-            <i class="bx bx-plus-circle"></i>
-            <span class="links_name">Input Bahan Pokok</span>
-          </a>
-          <span class="tooltip">Input Bahan Pokok</span>
+          <a href="inputData.html"
+            ><i class="bx bx-plus-circle"></i
+            ><span class="links_name">Input Bahan Pokok</span></a
+          ><span class="tooltip">Input Bahan Pokok</span>
         </li>
       </ul>
     </div>
 
-    <section class="home-section">
-      <div class="profile-container">
-        <div class="profile-card">
-          <div class="profile-header">
-            <img
-              src="./assets/profile.jpg"
-              alt="Profile Image"
-              class="profile-img"
-            />
-            <h3 id="profileName">John Doe</h3>
-            <p id="profileJob">Software Engineer</p>
+    <!-- Profile Section -->
+    <section class="profile-section">
+      <div class="profile-card">
+        <div class="image">
+          <img
+            src="./assets/profile.jpg"
+            alt="Profile Image"
+            class="profile-pic"
+          />
+        </div>
+        <div class="data">
+          <h2 id="profileName">John Doe</h2>
+          <span id="profileJob">Software Engineer</span>
+        </div>
+        <div class="row">
+          <div class="info">
+            <h3>Email</h3>
+            <span id="profileEmail">johndoe@example.com</span>
           </div>
-          <div class="profile-info">
-            <p>Email: <span id="profileEmail">johndoe@example.com</span></p>
-            <p>Phone: <span id="profilePhone">+123456789</span></p>
-            <p>Address: <span id="profileAddress">123 Main St, City</span></p>
+          <div class="info">
+            <h3>Phone</h3>
+            <span id="profilePhone">+123456789</span>
           </div>
+          <div class="info">
+            <h3>Address</h3>
+            <span id="profileAddress">123 Main St, City</span>
+          </div>
+        </div>
+
+        <!-- optional ieu bisi rek dihapus sokwe -->
+        <div class="buttons">
+          <a href="#" class="btn">Edit Profile</a>
+          <!-- <a href="#" class="btn">Settings</a> -->
         </div>
       </div>
     </section>
@@ -82,8 +97,8 @@
       document.getElementById("userId").textContent = userId;
       document.getElementById("userName").textContent = userName;
     </script>
+
     <script src="../src/js/logout.js"></script>
     <script src="../src/js/navbar.js"></script>
-    <script src="../src/js/profile.js"></script>
   </body>
 </html>
