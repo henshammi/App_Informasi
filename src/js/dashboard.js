@@ -1,6 +1,3 @@
-document.getElementById("userId").textContent = userId;
-document.getElementById("userName").textContent = userName;
-
 document.addEventListener("DOMContentLoaded", async () => {
   const tableBody = document.querySelector("#bahanTable tbody");
   const notificationElement = document.getElementById("notification");
@@ -16,11 +13,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         items.forEach((item, index) => {
           const row = document.createElement("tr");
 
+          // Convert the Base64 string to a Data URL
+          const imgSrc = item.gambar 
+            ? `data:image/jpeg;base64,${item.gambar}` 
+            : 'default.jpg';
+
           row.innerHTML = `
             <td>${index + 1}</td>
             <td>${item.name || "Nama tidak tersedia"}</td>
             <td>${item.harga || "Harga tidak tersedia"}</td>
             <td>${item.tanggal || "Tanggal tidak tersedia"}</td>
+            <td><img src="${imgSrc}" alt="${item.name}" style="width: 50px; height: 50px;"></td>
             <td><button onclick="deleteItem(${item.id})">Delete</button></td>
           `;
 
@@ -28,9 +31,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       } else {
         console.error("Error fetching items:", items.error);
+        showNotification("Gagal mengambil data item", "error");
       }
     } catch (error) {
       console.error("Error during fetch:", error);
+      showNotification("Terjadi kesalahan saat mengambil data", "error");
     }
   }
 
@@ -62,7 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Failed to delete item:", errorData.error);
       }
     } catch (error) {
-      showNotification("Error deleting item", "error");
+      showNotification("Terjadi kesalahan saat menghapus item", "error");
       console.error("Error deleting item:", error);
     }
   };

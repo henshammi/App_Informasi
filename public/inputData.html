@@ -70,10 +70,15 @@
 
           <label for="tanggal">Tanggal:</label>
           <input type="date" id="tanggal" name="tanggal" required />
+          <label for="gambar">Upload Gambar:</label>
+          <input type="file" id="gambar" name="gambar" accept="image/*" required />
 
           <button type="submit">Tambah</button>
         </form>
         <p id="message"></p>
+        <div id="loading" class="loading" style="display: none;">
+          <div class="spinner"></div>
+        </div>
         <img id="preview" style="display: none; margin-top: 20px" />
       </div>
     </section>
