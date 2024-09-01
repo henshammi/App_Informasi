@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -12,93 +12,82 @@
       rel="stylesheet"
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
     />
-  </head>
-  <body>
+</head>
+<body>
     <!-- Sidebar -->
     <div class="sidebar">
-      <div class="logo-details">
-        <i class="bx bx-data icon"></i>
-        <div class="logo_name">Fadil APP</div>
-        <i class="bx bx-menu" id="btn"></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <a href="index.html"
-            ><i class="bx bx-grid-alt"></i
-            ><span class="links_name">Dashboard</span></a
-          ><span class="tooltip">Dashboard</span>
-        </li>
-        <li>
-          <a href="profile.html"
-            ><i class="bx bx-user"></i
-            ><span class="links_name">Profile</span></a
-          ><span class="tooltip">Profile</span>
-        </li>
-        <li class="profile">
-          <div class="profile-details">
-            <img src="./assets/profile.jpg" alt="profileImg" />
-            <div class="name_job">
-              <div class="name"><span id="userId"></span></div>
-              <div class="job"><span id="userName"></span></div>
-            </div>
-          </div>
-          <i class="bx bx-log-out" id="log_out"></i>
-          <span class="tooltip-logout">Logout</span>
-        </li>
-        <li>
-          <a href="inputData.html"
-            ><i class="bx bx-plus-circle"></i
-            ><span class="links_name">Input Bahan Pokok</span></a
-          ><span class="tooltip">Input Bahan Pokok</span>
-        </li>
-      </ul>
+        <div class="logo-details">
+            <i class="bx bx-data icon"></i>
+            <div class="logo_name">Fadil APP</div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a href="index.html"
+                    ><i class="bx bx-grid-alt"></i
+                    ><span class="links_name">Dashboard</span></a
+                ><span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="profile.html"
+                    ><i class="bx bx-user"></i
+                    ><span class="links_name">Profile</span></a
+                ><span class="tooltip">Profile</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="./assets/profile.jpg" alt="profileImg" />
+                    <div class="name_job">
+                        <div class="name"><span id="userId"></span></div>
+                        <div class="job"><span id="userName"></span></div>
+                    </div>
+                </div>
+                <i class="bx bx-log-out" id="log_out"></i>
+                <span class="tooltip-logout">Logout</span>
+            </li>
+            <li>
+                <a href="inputData.html"
+                    ><i class="bx bx-plus-circle"></i
+                    ><span class="links_name">Input Bahan Pokok</span></a
+                ><span class="tooltip">Input Bahan Pokok</span>
+            </li>
+        </ul>
     </div>
 
     <!-- Profile Section -->
     <section class="profile-section">
-      <div class="profile-card">
-        <div class="image">
-          <img
-            src="./assets/profile.jpg"
-            alt="Profile Image"
-            class="profile-pic"
-          />
-        </div>
-        <div class="data">
-          <h2 id="profileName">John Doe</h2>
-          <span id="profileJob">Software Engineer</span>
-        </div>
-        <div class="row">
-          <div class="info">
-            <h3>Email</h3>
-            <span id="profileEmail">johndoe@example.com</span>
-          </div>
-          <div class="info">
-            <h3>Phone</h3>
-            <span id="profilePhone">+123456789</span>
-          </div>
-          <div class="info">
-            <h3>Address</h3>
-            <span id="profileAddress">123 Main St, City</span>
-          </div>
-        </div>
+        <div class="profile-card">
+            <div class="image">
+                <img
+                    src="./assets/profile.jpg"
+                    alt="Profile Image"
+                    class="profile-pic"
+                />
+            </div>
+            <div class="data">
+                <h2 id="profileName"></h2>
+            </div>
+            <div class="row">
+                <div class="info">
+                    <h3>Email</h3>
+                    <span id="profileEmail"></span>
+                </div>
+                <div class="info">
+                    <h3>Phone</h3>
+                    <span id="profilePhone"></span>
+                </div>
+                <div class="info">
+                    <h3>Address</h3>
+                    <span id="profileAddress"></span>
+                </div>
+            </div>
 
-        <!-- optional ieu bisi rek dihapus sokwe -->
-        <div class="buttons">
-          <a href="#" class="btn">Edit Profile</a>
-          <!-- <a href="#" class="btn">Settings</a> -->
+            
         </div>
-      </div>
     </section>
 
-    <script>
-      const userId = localStorage.getItem("userId");
-      const userName = localStorage.getItem("userName");
-      document.getElementById("userId").textContent = userId;
-      document.getElementById("userName").textContent = userName;
-    </script>
-
+    <script src="../src/js/profile.js"></script>
     <script src="../src/js/logout.js"></script>
     <script src="../src/js/navbar.js"></script>
-  </body>
+</body>
 </html>

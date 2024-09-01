@@ -27,9 +27,9 @@ app.use(
 
 // Endpoint Registrasi
 app.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, alamat, no_hp } = req.body;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !alamat || !no_hp) {
     return res.status(400).json({ error: "All fields are required." });
   }
 
@@ -48,7 +48,7 @@ app.post("/register", async (req, res) => {
     // input ke db
     const { data: user, error } = await supabase
       .from("users")
-      .insert([{ name, email, password: hashedPassword }])
+      .insert([{ name, email, password: hashedPassword, alamat, no_hp }])
       .single();
 
     if (error) {
@@ -99,6 +99,29 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: "Internal server error." });
   }
 });
+
+// Endpoint untuk mendapatkan data pengguna berdasarkan ID
+app.get("/users/:id", async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const { data: user, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", userId)
+      .single();
+
+    if (error || !user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error("Internal server error:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
+
 
 // Endpoint untuk mendapatkan daftar items
 app.get("/items", async (req, res) => {
