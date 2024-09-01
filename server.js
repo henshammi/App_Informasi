@@ -1,4 +1,4 @@
-//TONG DIOTAKATIK!
+
 //TONG DIOTAKATIK!
 const express = require("express");
 const { createClient } = require("@supabase/supabase-js");
