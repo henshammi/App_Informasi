@@ -73,11 +73,7 @@ app.post("/login", async (req, res) => {
   }
 
   try {
-    const { data: user, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("email", email)
-      .single();
+    const { data: user, error } = await supabase.from("users").select("*").eq("email", email).single();
 
     if (error || !user) {
       return res.status(401).json({ error: "Invalid credentials." });
@@ -104,11 +100,7 @@ app.get("/users/:id", async (req, res) => {
   const userId = req.params.id;
 
   try {
-    const { data: user, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("id", userId)
-      .single();
+    const { data: user, error } = await supabase.from("users").select("*").eq("id", userId).single();
 
     if (error || !user) {
       return res.status(404).json({ error: "User not found." });
@@ -169,10 +161,7 @@ app.delete("/items/:id", async (req, res) => {
   const itemId = req.params.id;
 
   try {
-    const { data, error } = await supabase
-      .from("items")
-      .delete()
-      .eq("id", itemId);
+    const { data, error } = await supabase.from("items").delete().eq("id", itemId);
 
     if (error) {
       console.error("Error deleting item from Supabase:", error.message);
@@ -185,6 +174,57 @@ app.delete("/items/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error." });
   }
 });
+
+// Endpoint untuk mendapatkan data grafik rata-rata harga bahan pokok
+app.get("/grafik-data", async (req, res) => {
+  const { bulanA, bulanB, bahanBaku } = req.query;
+
+  if (!bulanA || !bulanB || !bahanBaku) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from("items")
+      .select("harga, tanggal")
+      .gte("tanggal", `${bulanA}-01`)
+      .lte("tanggal", `${bulanB}-31`)
+      .eq("name", bahanBaku);
+
+    if (error) {
+      console.error("Error fetching grafik data:", error.message);
+      return res.status(500).json({ error: "Error fetching grafik data." });
+    }
+
+    // Proses data untuk menghasilkan rata-rata harga per bulan
+    const processedData = processGrafikData(data);
+    res.status(200).json(processedData);
+  } catch (err) {
+    console.error("Internal server error:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
+
+// Fungsi untuk memproses data dan menghitung rata-rata harga per bulan
+function processGrafikData(items) {
+  const monthlyData = {};
+
+  items.forEach((item) => {
+    const month = item.tanggal.substring(0, 7); // Mengambil "YYYY-MM" dari tanggal
+    if (!monthlyData[month]) {
+      monthlyData[month] = { total: 0, count: 0 };
+    }
+    monthlyData[month].total += parseFloat(item.harga);
+    monthlyData[month].count += 1;
+  });
+
+  return Object.keys(monthlyData).map((month) => {
+    return {
+      month,
+      average_price: (monthlyData[month].total / monthlyData[month].count).toFixed(2),
+    };
+  });
+}
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
