@@ -14,9 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           const row = document.createElement("tr");
 
           // Convert the Base64 string to a Data URL
-          const imgSrc = item.gambar 
-            ? `data:image/jpeg;base64,${item.gambar}` 
-            : 'default.jpg';
+          const imgSrc = item.gambar ? `data:image/jpeg;base64,${item.gambar}` : "default.jpg";
 
           row.innerHTML = `
             <td>${index + 1}</td>
