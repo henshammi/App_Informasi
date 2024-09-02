@@ -51,6 +51,13 @@
             ><span class="links_name">Input Bahan Pokok</span></a
           ><span class="tooltip">Input Bahan Pokok</span>
         </li>
+        <li>
+          <a href="grafik.html">
+            <i class="bx bx-bar-chart-alt-2"></i>
+            <span class="links_name">Grafik</span>
+          </a>
+          <span class="tooltip">Grafik</span>
+        </li>
       </ul>
     </div>
 
@@ -65,39 +72,26 @@
           />
         </div>
         <div class="data">
-          <h2 id="profileName">John Doe</h2>
-          <span id="profileJob">Software Engineer</span>
+          <h2 id="profileName"></h2>
         </div>
         <div class="row">
           <div class="info">
             <h3>Email</h3>
-            <span id="profileEmail">johndoe@example.com</span>
+            <span id="profileEmail"></span>
           </div>
           <div class="info">
             <h3>Phone</h3>
-            <span id="profilePhone">+123456789</span>
+            <span id="profilePhone"></span>
           </div>
           <div class="info">
             <h3>Address</h3>
-            <span id="profileAddress">123 Main St, City</span>
+            <span id="profileAddress"></span>
           </div>
-        </div>
-
-        <!-- optional ieu bisi rek dihapus sokwe -->
-        <div class="buttons">
-          <a href="#" class="btn">Edit Profile</a>
-          <!-- <a href="#" class="btn">Settings</a> -->
         </div>
       </div>
     </section>
 
-    <script>
-      const userId = localStorage.getItem("userId");
-      const userName = localStorage.getItem("userName");
-      document.getElementById("userId").textContent = userId;
-      document.getElementById("userName").textContent = userName;
-    </script>
-
+    <script src="../src/js/profile.js"></script>
     <script src="../src/js/logout.js"></script>
     <script src="../src/js/navbar.js"></script>
   </body>
