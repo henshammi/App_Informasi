@@ -9,7 +9,7 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
   }
 
   try {
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("https://serverbapokbeta.vercel.app/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -25,7 +25,7 @@ document.getElementById("importForm").addEventListener("submit", async (event) =
     const json = JSON.stringify(data);
 
     // Kirim data ke server
-    const response = await fetch("http://localhost:3000/import-data", {
+    const response = await fetch("https://serverbapokbeta.vercel.app/import-data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

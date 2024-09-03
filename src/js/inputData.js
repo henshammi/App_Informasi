@@ -17,7 +17,7 @@ document.getElementById("bahanForm").addEventListener("submit", async (event) =>
       const base64String = reader.result.replace(/^data:.+;base64,/, "");
 
       try {
-        const response = await fetch("http://localhost:3000/add-bahan", {
+        const response = await fetch("https://serverbapokbeta.vercel.app/add-bahan", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -51,7 +51,7 @@ document.getElementById("bahanForm").addEventListener("submit", async (event) =>
   } else {
     // Jika tidak ada gambar yang diunggah, kirim data tanpa gambar
     try {
-      const response = await fetch("http://localhost:3000/add-bahan", {
+      const response = await fetch("https://serverbapokbeta.vercel.app/add-bahan", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

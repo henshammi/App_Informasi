@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/grafik-data?bulanA=${bulanA}&bulanB=${bulanB}&bahanBaku=${bahanBaku}`
+        `https://serverbapokbeta.vercel.app/grafik-data?bulanA=${bulanA}&bulanB=${bulanB}&bahanBaku=${bahanBaku}`
       );
       const data = await response.json();
 

@@ -8,7 +8,9 @@ async function generateReport() {
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/laporan?startDate=${startDate}&endDate=${endDate}`);
+    const response = await fetch(
+      `https://serverbapokbeta.vercel.app/laporan?startDate=${startDate}&endDate=${endDate}`
+    );
     const data = await response.json();
 
     if (response.ok) {

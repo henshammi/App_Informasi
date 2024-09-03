@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const multer = require("multer");
 const XLSX = require("xlsx");
-const upload = multer({ dest: "uploads/" });
 require("dotenv").config();
 
 // Konfigurasi Supabase

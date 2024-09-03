@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/items/${itemId}`, {
+      const response = await fetch(`https://serverbapokbeta.vercel.app/items/${itemId}`, {
         method: "DELETE",
       });
 
