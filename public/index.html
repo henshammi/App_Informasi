@@ -76,7 +76,19 @@
     <section class="home-section">
       <div class="container-box">
         <div class="text">Daftar Bahan Pokok</div>
+        <input type="text" id="searchInput" placeholder="Cari berdasarkan nama..." onkeyup="filterItems()" />
 
+        <div>
+          <label for="priceFilter">Filter Harga:</label>
+          <input type="number" id="minPrice" placeholder="Harga Minimum" onkeyup="filterItems()" />
+          <input type="number" id="maxPrice" placeholder="Harga Maksimum" onkeyup="filterItems()" />
+        </div>
+
+        <div>
+          <label for="dateFilter">Filter Tanggal:</label>
+          <input type="date" id="startDate" onchange="filterItems()" />
+          <input type="date" id="endDate" onchange="filterItems()" />
+        </div>
         <!-- tabel -->
         <div class="table-container">
           <table id="bahanTable">
@@ -94,6 +106,7 @@
           </table>
         </div>
       </div>
+      <div id="pagination"></div>
     </section>
     <div id="notification" class="notification" style="display: none"></div>
     <script>

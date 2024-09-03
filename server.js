@@ -27,6 +27,19 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 app.use(express.static("public"));
 
+function checkAuth(req, res, next) {
+  // Implementasikan logika untuk memeriksa status login di sini
+  // Misalnya, dengan memeriksa token di session atau cookies
+  const loggedIn = req.session && req.session.user; // Contoh pemeriksaan
+  req.loggedIn = loggedIn;
+  next();
+}
+
+// Endpoint untuk memeriksa status login
+app.get("/check-login", checkAuth, (req, res) => {
+  res.json({ loggedIn: req.loggedIn });
+});
+
 // Endpoint Registrasi
 app.post("/register", async (req, res) => {
   const { name, email, password, alamat, no_hp } = req.body;
