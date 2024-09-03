@@ -3,18 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/inputData.css" />
-    <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <link rel="stylesheet" href="./assets/css/dashboard.css" />
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
-    <title>Input Bahan Pokok</title>
+    <title>Grafik Rata-rata Harga Bahan Pokok</title>
   </head>
-
   <body>
     <!-- sidebar -->
     <div class="sidebar">
       <div class="logo-details">
         <i class="bx bx-data icon"></i>
-
         <div class="logo_name">Fadil APP</div>
         <i class="bx bx-menu" id="btn"></i>
       </div>
@@ -47,13 +44,6 @@
           </a>
           <span class="tooltip">Grafik</span>
         </li>
-        <li>
-          <a href="grafiklap.html">
-            <i class="bx bx-chart"></i>
-            <span class="links_name">Grafik Laporan</span>
-          </a>
-          <span class="tooltip">Grafik Laporan</span>
-        </li>
         <li class="profile">
           <div class="profile-details">
             <!-- fotonya tar disini -->
@@ -70,37 +60,30 @@
     </div>
 
     <section class="home-section">
-      <div class="container-box2">
-        <div class="text2">Input Data Bahan Pokok</div>
-        <form id="bahanForm">
-          <label for="nama">Nama Bahan Pokok:</label>
-          <input type="text" id="nama" name="nama" required />
+      <div class="container-box">
+        <div class="text">Grafik Rata-rata Harga Bahan Pokok</div>
+        <form id="grafikForm">
+          <label for="bulanA">Bulan Mulai:</label>
+          <input type="month" id="bulanA" name="bulanA" required />
 
-          <label for="harga">Harga Bahan Pokok:</label>
-          <input type="number" id="harga" name="harga" required />
+          <label for="bulanB">Bulan Akhir:</label>
+          <input type="month" id="bulanB" name="bulanB" required />
 
-          <label for="tanggal">Tanggal:</label>
-          <input type="date" id="tanggal" name="tanggal" required />
-          <label for="gambar">Upload Gambar:</label>
-          <input type="file" id="gambar" name="gambar" accept="image/*" required />
-
-          <button type="submit">Tambah</button>
+          <button type="submit">Tampilkan Grafik</button>
         </form>
-        <p id="message"></p>
-        <div id="loading" class="loading" style="display: none">
-          <div class="spinner"></div>
-        </div>
-        <img id="preview" style="display: none; margin-top: 20px" />
+        <canvas id="hargaChart"></canvas>
       </div>
     </section>
-
     <script>
       const userId = localStorage.getItem("userId");
       const userName = localStorage.getItem("userName");
       document.getElementById("userId").textContent = userId;
       document.getElementById("userName").textContent = userName;
     </script>
-    <script src="../src/js/inputData.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../src/js/grafiklap.js"></script>
+    <script src="../src/js/logout.js"></script>
+    <script src="../src/js/dashboard.js"></script>
     <script src="../src/js/navbar.js"></script>
   </body>
 </html>
