@@ -1,6 +1,13 @@
 document.getElementById("bahanForm").addEventListener("submit", async (event) => {
   event.preventDefault();
 
+  // Menampilkan dialog konfirmasi sebelum melanjutkan
+  const confirmation = confirm("Apakah Anda sudah memeriksa data dengan teliti? Tekan 'Tambah' jika Anda yakin.");
+
+  if (!confirmation) {
+    return; // Jika user memilih "Batal", eksekusi dihentikan
+  }
+
   // Menampilkan animasi loading
   document.getElementById("loading").style.display = "flex";
 

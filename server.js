@@ -5,6 +5,9 @@ const { createClient } = require("@supabase/supabase-js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
+const multer = require("multer");
+const XLSX = require("xlsx");
+const upload = multer({ dest: "uploads/" });
 require("dotenv").config();
 
 // Konfigurasi Supabase
@@ -225,6 +228,96 @@ function processGrafikData(items) {
     };
   });
 }
+
+// Endpoint untuk mendapatkan data grafik rata-rata harga bahan pokok
+app.get("/grafik-laporan", async (req, res) => {
+  const { bulanA, bulanB } = req.query;
+
+  if (!bulanA || !bulanB) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  try {
+    const endDateA = new Date(bulanA + "-01");
+    const endDateB = new Date(bulanB + "-01");
+
+    // Tambah satu bulan pada endDateB dan atur tanggal ke 0 (hari pertama bulan berikutnya)
+    endDateB.setMonth(endDateB.getMonth() + 1);
+    endDateB.setDate(0);
+
+    const formattedEndDateB = endDateB.toISOString().split("T")[0];
+
+    const { data, error } = await supabase
+      .from("items")
+      .select("name, harga, tanggal")
+      .gte("tanggal", `${bulanA}-01`)
+      .lte("tanggal", formattedEndDateB);
+
+    if (error) {
+      console.error("Error fetching grafik data:", error.message);
+      return res.status(500).json({ error: "Error fetching grafik data." });
+    }
+
+    // Proses data untuk menghitung rata-rata harga per bahan baku
+    const processedData = processGrafikLaporan(data);
+    res.status(200).json(processedData);
+  } catch (err) {
+    console.error("Internal server error:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
+
+// Fungsi untuk memproses data dan menghitung rata-rata harga per bahan baku
+function processGrafikLaporan(items) {
+  const bahanBakuData = {};
+
+  items.forEach((item) => {
+    if (!bahanBakuData[item.name]) {
+      bahanBakuData[item.name] = { total: 0, count: 0 };
+    }
+    bahanBakuData[item.name].total += parseFloat(item.harga);
+    bahanBakuData[item.name].count += 1;
+  });
+
+  return Object.keys(bahanBakuData).map((bahanBaku) => {
+    return {
+      bahanBaku,
+      average_price: (bahanBakuData[bahanBaku].total / bahanBakuData[bahanBaku].count).toFixed(2),
+    };
+  });
+}
+
+app.post("/import-data", async (req, res) => {
+  const items = req.body;
+
+  if (!Array.isArray(items)) {
+    return res.status(400).json({ error: "Invalid data format." });
+  }
+
+  try {
+    for (const item of items) {
+      const { nama, harga, tanggal, gambar } = item;
+
+      if (!nama || !harga || !tanggal || !gambar) {
+        console.error("Incomplete item data:", item);
+        return res.status(400).json({ error: "All fields are required." });
+      }
+
+      // Tambahkan data ke database
+      const { data, error } = await supabase.from("items").insert([{ name: nama, harga, tanggal, gambar }]);
+
+      if (error) {
+        console.error("Error inserting data:", error.message);
+        return res.status(500).json({ error: "Error inserting data." });
+      }
+    }
+
+    res.status(200).json({ message: "Data imported successfully." });
+  } catch (err) {
+    console.error("Internal server error:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

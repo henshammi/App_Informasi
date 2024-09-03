@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/dashboard.css" />
-    <title>Dashboard</title>
+    <link rel="stylesheet" href="./assets/css/dashboard.css" />
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <title>Grafik Rata-rata Harga Bahan Pokok</title>
   </head>
   <body>
     <!-- sidebar -->
@@ -75,34 +75,27 @@
 
     <section class="home-section">
       <div class="container-box">
-        <div class="text">Daftar Bahan Pokok</div>
+        <div class="text">Grafik Rata-rata Harga Bahan Pokok</div>
+        <form id="grafikForm">
+          <label for="bulanA">Bulan Mulai:</label>
+          <input type="month" id="bulanA" name="bulanA" required />
 
-        <!-- tabel -->
-        <div class="table-container">
-          <table id="bahanTable">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama Bahan Pokok</th>
-                <th>Harga Bahan Pokok</th>
-                <th>Tanggal</th>
-                <th>Gambar</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody id="bahanBody"></tbody>
-          </table>
-        </div>
+          <label for="bulanB">Bulan Akhir:</label>
+          <input type="month" id="bulanB" name="bulanB" required />
+
+          <button type="submit">Tampilkan Grafik</button>
+        </form>
+        <canvas id="hargaChart"></canvas>
       </div>
     </section>
-    <div id="notification" class="notification" style="display: none"></div>
-
     <script>
       const userId = localStorage.getItem("userId");
       const userName = localStorage.getItem("userName");
       document.getElementById("userId").textContent = userId;
       document.getElementById("userName").textContent = userName;
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../src/js/grafiklap.js"></script>
     <script src="../src/js/logout.js"></script>
     <script src="../src/js/dashboard.js"></script>
     <script src="../src/js/navbar.js"></script>

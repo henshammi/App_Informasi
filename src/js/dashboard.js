@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           row.innerHTML = `
             <td>${index + 1}</td>
             <td>${item.name || "Nama tidak tersedia"}</td>
-            <td>${item.harga || "Harga tidak tersedia"}</td>
+            <td>${item.harga ? `Rp ${item.harga.toLocaleString("id-ID")}` : "Harga tidak tersedia"}</td>
             <td>${item.tanggal || "Tanggal tidak tersedia"}</td>
             <td><img src="${imgSrc}" alt="${item.name}" style="width: 50px; height: 50px;"></td>
             <td><button onclick="deleteItem(${item.id})">Delete</button></td>
@@ -51,6 +51,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   await fetchItems();
 
   window.deleteItem = async function (itemId) {
+    // Menampilkan dialog konfirmasi sebelum menghapus item
+    const confirmation = confirm("Apakah Anda yakin ingin menghapus item ini?");
+
+    if (!confirmation) {
+      return; // Jika user memilih "Batal", eksekusi dihentikan
+    }
+
     try {
       const response = await fetch(`http://localhost:3000/items/${itemId}`, {
         method: "DELETE",
