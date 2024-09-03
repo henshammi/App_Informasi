@@ -1,6 +1,15 @@
 document.getElementById("importForm").addEventListener("submit", async (event) => {
   event.preventDefault(); // Mencegah perilaku default dari form
 
+  // Menampilkan dialog konfirmasi sebelum melanjutkan
+  const confirmation = confirm(
+    "Apakah Anda yakin ingin mengimpor data? Pastikan data pada file excel sudah benar sebelum melanjutkan."
+  );
+
+  if (!confirmation) {
+    return; // Jika user memilih "Batal", eksekusi dihentikan
+  }
+
   const fileInput = document.getElementById("fileInput");
   const file = fileInput.files[0];
 
@@ -30,7 +39,7 @@ document.getElementById("importForm").addEventListener("submit", async (event) =
 
     const result = await response.json();
     console.log(result);
-    alert("Data imported successfully!");
+    alert("Data berhasil di import!");
   } catch (error) {
     console.error("Error:", error);
     alert("An error occurred.");
