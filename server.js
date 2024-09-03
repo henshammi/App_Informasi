@@ -332,6 +332,64 @@ app.post("/import-data", async (req, res) => {
   }
 });
 
+// Endpoint untuk laporan
+app.get("/laporan", async (req, res) => {
+  const { startDate, endDate } = req.query;
+
+  if (!startDate || !endDate) {
+    return res.status(400).json({ error: "Tanggal mulai dan tanggal akhir harus diisi." });
+  }
+
+  try {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    end.setMonth(end.getMonth() + 1);
+    end.setDate(0);
+
+    const formattedEndDate = end.toISOString().split("T")[0];
+
+    // Query database untuk mendapatkan data
+    // Contoh menggunakan Supabase (ganti dengan query database Anda)
+    const { data, error } = await supabase
+      .from("items")
+      .select("name, harga")
+      .gte("tanggal", startDate)
+      .lte("tanggal", formattedEndDate);
+
+    if (error) {
+      console.error("Error fetching laporan data:", error.message);
+      return res.status(500).json({ error: "Terjadi kesalahan saat mengambil data laporan." });
+    }
+
+    const laporanData = processLaporanData(data);
+
+    res.status(200).json(laporanData);
+  } catch (err) {
+    console.error("Internal server error:", err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
+
+// Fungsi untuk memproses data laporan
+function processLaporanData(items) {
+  const laporan = {};
+
+  items.forEach((item) => {
+    if (!laporan[item.name]) {
+      laporan[item.name] = { total: 0, count: 0 };
+    }
+
+    laporan[item.name].total += item.harga;
+    laporan[item.name].count += 1;
+  });
+
+  return Object.keys(laporan).map((name) => ({
+    bahanBaku: name,
+    average_price: (laporan[name].total / laporan[name].count).toFixed(2),
+  }));
+}
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

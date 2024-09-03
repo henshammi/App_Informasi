@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/dashboard.css" />
-    <title>Dashboard</title>
+    <link rel="stylesheet" href="./assets/css/dashboard.css" />
+    <title>Laporan</title>
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
   </head>
   <body>
@@ -82,38 +82,21 @@
 
     <section class="home-section">
       <div class="container-box">
-        <div class="text">Daftar Bahan Pokok</div>
-        <input type="text" id="searchInput" placeholder="Cari berdasarkan nama..." onkeyup="filterItems()" />
-
+        <div class="text">Laporan Harga Bahan Pokok</div>
         <div>
-          <label for="priceFilter">Filter Harga:</label>
-          <input type="number" id="minPrice" placeholder="Harga Minimum" onkeyup="filterItems()" />
-          <input type="number" id="maxPrice" placeholder="Harga Maksimum" onkeyup="filterItems()" />
+          <label for="startDate">Tanggal Mulai:</label>
+          <input type="date" id="startDate" />
         </div>
-
         <div>
-          <label for="dateFilter">Filter Tanggal:</label>
-          <input type="date" id="startDate" onchange="filterItems()" />
-          <input type="date" id="endDate" onchange="filterItems()" />
+          <label for="endDate">Tanggal Akhir:</label>
+          <input type="date" id="endDate" />
         </div>
-        <!-- tabel -->
-        <div class="table-container">
-          <table id="bahanTable">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama Bahan Pokok</th>
-                <th>Harga Bahan Pokok</th>
-                <th>Tanggal</th>
-                <th>Gambar</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody id="bahanBody"></tbody>
-          </table>
+        <button onclick="generateReport()">Generate</button>
+
+        <div id="reportContainer">
+          <!-- Hasil laporan akan muncul di sini -->
         </div>
       </div>
-      <div id="pagination"></div>
     </section>
     <div id="notification" class="notification" style="display: none"></div>
     <script>
@@ -123,7 +106,7 @@
       document.getElementById("userName").textContent = userName;
     </script>
     <script src="../src/js/logout.js"></script>
-    <script src="../src/js/dashboard.js"></script>
+    <script src="../src/js/laporan.js"></script>
     <script src="../src/js/navbar.js"></script>
   </body>
 </html>
