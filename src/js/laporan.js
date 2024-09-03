@@ -54,3 +54,22 @@ function displayReport(data) {
 
   reportContainer.appendChild(table);
 }
+
+// laporan.js
+document.getElementById("generatePdf").addEventListener("click", async () => {
+  const { jsPDF } = window.jspdf;
+
+  // Ambil data dari tabel
+  const table = document.querySelector("table");
+  const pdf = new jsPDF();
+
+  // Tambahkan judul
+  pdf.setFontSize(16);
+  pdf.text("Laporan Harga Bahan Pokok", 14, 20);
+
+  // Tambahkan tabel ke PDF
+  pdf.autoTable({ html: table, startY: 30 });
+
+  // Simpan PDF
+  pdf.save("laporan.pdf");
+});
