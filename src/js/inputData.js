@@ -1,13 +1,6 @@
 document.getElementById("bahanForm").addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  // Menampilkan dialog konfirmasi sebelum melanjutkan
-  const confirmation = confirm("Apakah Anda sudah memeriksa data dengan teliti? Tekan 'Tambah' jika Anda yakin.");
-
-  if (!confirmation) {
-    return; // Jika user memilih "Batal", eksekusi dihentikan
-  }
-
   // Menampilkan animasi loading
   document.getElementById("loading").style.display = "flex";
 
@@ -24,7 +17,7 @@ document.getElementById("bahanForm").addEventListener("submit", async (event) =>
       const base64String = reader.result.replace(/^data:.+;base64,/, "");
 
       try {
-        const response = await fetch("http://localhost:3000/add-bahan", {
+        const response = await fetch("https://serverbapokbeta.vercel.app/add-bahan", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -58,7 +51,7 @@ document.getElementById("bahanForm").addEventListener("submit", async (event) =>
   } else {
     // Jika tidak ada gambar yang diunggah, kirim data tanpa gambar
     try {
-      const response = await fetch("http://localhost:3000/add-bahan", {
+      const response = await fetch("https://serverbapokbeta.vercel.app/add-bahan", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
