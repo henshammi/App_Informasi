@@ -343,12 +343,20 @@ th {
   display: none;
 }
 
+/* Notification styling */
 .notification {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: auto; /* Adjust as needed */
+  max-width: 300px;
+  padding: 15px;
+  border-radius: 8px;
   color: white;
   text-align: center;
+  opacity: 0; /* Initially hidden */
+  transform: translateX(100%); /* Start from right outside the screen */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for animation */
 }
 
 .notification.success {
@@ -357,4 +365,16 @@ th {
 
 .notification.error {
   background-color: #f44336; /* Red */
+}
+
+/* Animation for showing notification */
+.notification.show {
+  opacity: 1; /* Make visible */
+  transform: translateX(0); /* Move into view */
+}
+
+/* Animation for hiding notification */
+.notification.hide {
+  opacity: 0; /* Hide */
+  transform: translateX(100%); /* Move out of view */
 }
