@@ -1,5 +1,6 @@
 document.getElementById("loginForm").addEventListener("submit", async (event) => {
   event.preventDefault();
+
   const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value.trim();
 
@@ -20,11 +21,12 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
     const result = await response.json();
 
     if (response.ok) {
+      // Menyimpan token atau informasi user ke localStorage
       localStorage.setItem("userId", result.userId);
       localStorage.setItem("userName", result.userName);
 
       alert(`Login berhasil! Selamat datang, ${result.userName}`);
-      window.location.href = "index.html";
+      window.location.href = "index.html"; // Redirect ke halaman utama
     } else {
       alert(`Login gagal: ${result.error}`);
     }

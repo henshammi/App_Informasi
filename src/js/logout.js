@@ -1,10 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
-  let logOutBtn = document.querySelector("#log_out");
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutButton = document.getElementById("log_out");
 
-  logOutBtn.addEventListener("click", () => {
+  logoutButton.addEventListener("click", () => {
+    // Hapus data login dari localStorage
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
 
+    // Redirect ke halaman login
     window.location.href = "login.html";
   });
 });

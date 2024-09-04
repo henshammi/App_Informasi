@@ -1,7 +1,19 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  // Mendapatkan userId dari localStorage
   const userId = localStorage.getItem("userId");
 
+  // Jika userId tidak ada, artinya pengguna belum login
+  if (!userId) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const userName = localStorage.getItem("userName");
+
+  // Update elemen di sidebar
+  if (userId && userName) {
+    document.getElementById("userId").textContent = userId;
+    document.getElementById("userName").textContent = userName;
+  }
   // Fungsi untuk mengambil data profil dari server
   async function loadProfile() {
     try {

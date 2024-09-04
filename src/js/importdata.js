@@ -1,97 +1,107 @@
-document.getElementById("importForm").addEventListener("submit", async (event) => {
-  event.preventDefault(); // Mencegah perilaku default dari form
+document.addEventListener("DOMContentLoaded", () => {
+  const userId = localStorage.getItem("userId");
 
-  // Menampilkan dialog konfirmasi sebelum melanjutkan
-  const confirmation = confirm(
-    "Apakah Anda yakin ingin mengimpor data? Pastikan data pada file excel sudah benar sebelum melanjutkan."
-  );
-
-  if (!confirmation) {
-    return; // Jika user memilih "Batal", eksekusi dihentikan
-  }
-
-  const fileInput = document.getElementById("fileInput");
-  const file = fileInput.files[0];
-
-  if (!file) {
-    alert("Please select a file.");
+  // Jika userId tidak ada, artinya pengguna belum login
+  if (!userId) {
+    window.location.href = "login.html";
     return;
   }
 
-  try {
-    const data = await readExcelFile(file);
-    console.log("Data to be sent:", data); // Tambahkan log untuk memeriksa data
+  document.getElementById("importForm").addEventListener("submit", async (event) => {
+    event.preventDefault(); // Mencegah perilaku default dari form
 
-    const json = JSON.stringify(data);
+    // Menampilkan dialog konfirmasi sebelum melanjutkan
+    const confirmation = confirm(
+      "Apakah Anda yakin ingin mengimpor data? Pastikan data pada file excel sudah benar sebelum melanjutkan."
+    );
 
-    // Kirim data ke server
-    const response = await fetch("https://serverbapokbeta.vercel.app/import-data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: json,
-    });
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok.");
+    if (!confirmation) {
+      return; // Jika user memilih "Batal", eksekusi dihentikan
     }
 
-    const result = await response.json();
-    console.log(result);
-    alert("Data berhasil di import!");
-  } catch (error) {
-    console.error("Error:", error);
-    alert("An error occurred.");
-  }
-});
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
 
-async function readExcelFile(file) {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.load(file);
-  const worksheet = workbook.worksheets[0];
-  const data = [];
+    if (!file) {
+      alert("Silakan pilih file.");
+      return;
+    }
 
-  worksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
-    if (rowNumber > 1) {
-      // Skip header
-      const nama = row.getCell(1).text;
-      const harga = row.getCell(2).text;
-      const cellTanggal = row.getCell(3);
-      const gambar = row.getCell(4).text;
+    try {
+      const data = await readExcelFile(file);
+      console.log("Data to be sent:", data); // Tambahkan log untuk memeriksa data
 
-      // Tangani format tanggal
-      let tanggal;
-      if (cellTanggal.value instanceof Date) {
-        tanggal = formatTanggal(cellTanggal.value);
-      } else {
-        const dateStr = cellTanggal.text;
-        tanggal = formatTanggal(new Date(dateStr));
+      const json = JSON.stringify(data);
+
+      // Kirim data ke server
+      const response = await fetch("https://serverbapokbeta.vercel.app/import-data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: json,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok.");
       }
 
-      // Hanya tambahkan jika semua field ada
-      if (nama && harga && tanggal && gambar) {
-        data.push({
-          nama,
-          harga,
-          tanggal,
-          gambar,
-        });
-      }
+      const result = await response.json();
+      console.log(result);
+      alert("Data berhasil diimpor!");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Terjadi kesalahan.");
     }
   });
 
-  return data;
-}
+  async function readExcelFile(file) {
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(file);
+    const worksheet = workbook.worksheets[0];
+    const data = [];
 
-function formatTanggal(tanggal) {
-  if (tanggal instanceof Date) {
-    const year = tanggal.getFullYear();
-    const month = (tanggal.getMonth() + 1).toString().padStart(2, "0");
-    const day = tanggal.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
+    worksheet.eachRow({ includeEmpty: true }, (row, rowNumber) => {
+      if (rowNumber > 1) {
+        // Skip header
+        const nama = row.getCell(1).text;
+        const harga = row.getCell(2).text;
+        const cellTanggal = row.getCell(3);
+        const gambar = row.getCell(4).text;
+
+        // Tangani format tanggal
+        let tanggal;
+        if (cellTanggal.value instanceof Date) {
+          tanggal = formatTanggal(cellTanggal.value);
+        } else {
+          const dateStr = cellTanggal.text;
+          tanggal = formatTanggal(new Date(dateStr));
+        }
+
+        // Hanya tambahkan jika semua field ada
+        if (nama && harga && tanggal && gambar) {
+          data.push({
+            nama,
+            harga,
+            tanggal,
+            gambar,
+          });
+        }
+      }
+    });
+
+    return data;
   }
 
-  console.error("Invalid date:", tanggal);
-  return "";
-}
+  function formatTanggal(tanggal) {
+    if (tanggal instanceof Date) {
+      const year = tanggal.getFullYear();
+      const month = (tanggal.getMonth() + 1).toString().padStart(2, "0");
+      const day = tanggal.getDate().toString().padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    console.error("Invalid date:", tanggal);
+    return "";
+  }
+});

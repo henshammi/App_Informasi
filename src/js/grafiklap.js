@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const hargaChart = document.getElementById("hargaChart").getContext("2d");
 
   let chartInstance;
+  // Cek apakah user sudah login
+  const userId = localStorage.getItem("userId");
+  if (!userId) {
+    window.location.href = "login.html";
+    return;
+  }
 
   // Fungsi untuk fetch data grafik dan menampilkannya di chart
   async function fetchGrafikData(bulanA, bulanB) {
