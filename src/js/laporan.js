@@ -1,77 +1,85 @@
-async function generateReport() {
-  const startDate = document.getElementById("startDate").value;
-  const endDate = document.getElementById("endDate").value;
+document.addEventListener("DOMContentLoaded", () => {
+  const userId = localStorage.getItem("userId");
 
-  if (!startDate || !endDate) {
-    alert("Harap masukkan tanggal mulai dan tanggal akhir.");
+  if (!userId) {
+    window.location.href = "login.html";
     return;
   }
 
-  try {
-    const response = await fetch(
-      `https://serverbapokbeta.vercel.app/laporan?startDate=${startDate}&endDate=${endDate}`
-    );
-    const data = await response.json();
+  async function generateReport() {
+    const startDate = document.getElementById("startDate").value;
+    const endDate = document.getElementById("endDate").value;
 
-    if (response.ok) {
-      displayReport(data);
-    } else {
-      console.error(data.error);
+    if (!startDate || !endDate) {
+      alert("Harap masukkan tanggal mulai dan tanggal akhir.");
+      return;
     }
-  } catch (error) {
-    console.error("Terjadi kesalahan:", error);
+
+    try {
+      const response = await fetch(
+        `https://serverbapokbeta.vercel.app/laporan?startDate=${startDate}&endDate=${endDate}`
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        displayReport(data);
+      } else {
+        console.error(data.error);
+      }
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error);
+    }
   }
-}
 
-function displayReport(data) {
-  const reportContainer = document.getElementById("reportContainer");
-  reportContainer.innerHTML = "";
+  function displayReport(data) {
+    const reportContainer = document.getElementById("reportContainer");
+    reportContainer.innerHTML = "";
 
-  if (data.length === 0) {
-    reportContainer.innerHTML = "<p>Tidak ada data untuk ditampilkan.</p>";
-    return;
-  }
+    if (data.length === 0) {
+      reportContainer.innerHTML = "<p>Tidak ada data untuk ditampilkan.</p>";
+      return;
+    }
 
-  const table = document.createElement("table");
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>Nama Bahan Pokok</th>
-        <th>Harga Rata-Rata</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${data
-        .map(
-          (item) => `
+    const table = document.createElement("table");
+    table.innerHTML = `
+      <thead>
         <tr>
-          <td>${item.bahanBaku}</td>
-          <td>Rp ${parseFloat(item.average_price).toLocaleString("id-ID", { minimumFractionDigits: 0 })}</td>
+          <th>Nama Bahan Pokok</th>
+          <th>Harga Rata-Rata</th>
         </tr>
-      `
-        )
-        .join("")}
-    </tbody>
-  `;
+      </thead>
+      <tbody>
+        ${data
+          .map(
+            (item) => `
+              <tr>
+                <td>${item.bahanBaku}</td>
+                <td>Rp ${parseFloat(item.average_price).toLocaleString("id-ID", { minimumFractionDigits: 0 })}</td>
+              </tr>
+            `
+          )
+          .join("")}
+      </tbody>
+    `;
 
-  reportContainer.appendChild(table);
-}
+    reportContainer.appendChild(table);
+  }
 
-// laporan.js
-document.getElementById("generatePdf").addEventListener("click", async () => {
-  const { jsPDF } = window.jspdf;
+  document.getElementById("generatePdf").addEventListener("click", () => {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF();
 
-  // Ambil data dari tabel
-  const table = document.querySelector("table");
-  const pdf = new jsPDF();
+    pdf.setFontSize(16);
+    pdf.text("Laporan Harga Bahan Pokok", 14, 20);
 
-  // Tambahkan judul
-  pdf.setFontSize(16);
-  pdf.text("Laporan Harga Bahan Pokok", 14, 20);
+    const table = document.querySelector("table");
+    if (table) {
+      pdf.autoTable({ html: table, startY: 30 });
+    }
 
-  // Tambahkan tabel ke PDF
-  pdf.autoTable({ html: table, startY: 30 });
+    pdf.save("laporan.pdf");
+  });
 
-  // Simpan PDF
-  pdf.save("laporan.pdf");
+  // Export fungsi generateReport agar bisa dipanggil dari onclick di HTML
+  window.generateReport = generateReport;
 });

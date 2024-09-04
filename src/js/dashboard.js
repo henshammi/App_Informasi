@@ -4,7 +4,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   let allItems = [];
   let filteredItems = [];
   let currentPage = 1;
-  const itemsPerPage = 5; // Menampilkan 5 data per halaman
+  const itemsPerPage = 5;
+
+  const userId = localStorage.getItem("userId");
+  console.log("User ID saat ini:", userId);
+
+  if (!userId) {
+    window.location.href = "login.html";
+  }
 
   async function fetchItems() {
     try {
@@ -24,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  async function showNotification(message, type) {
+  function showNotification(message, type) {
     notificationElement.textContent = message;
     notificationElement.className = `notification ${type}`;
     notificationElement.style.display = "block";
