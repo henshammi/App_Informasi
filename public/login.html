@@ -3,113 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/logreg.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
     <title>login</title>
   </head>
   <body>
-    <section class="wrapper active">
-      <!-- Signup Form -->
-      <div class="form signup">
-        <header>Signup</header>
-        <form action="#" id="registerForm">
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Full name"
-            required
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email address"
-            required
-          />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
-          <input
-            type="text"
-            id="alamat"
-            name="alamat"
-            placeholder="alamat"
-            required
-          />
-          <input
-            type="number"
-            id="no_hp"
-            name="no_hp"
-            placeholder="no handphone"
-            required
-          />
-          <p class="link-sec">
-            Already have an account?
-            <a class="register-link" href="login.html" id="loginLink">Login</a>
-          </p>
-          <input type="submit" value="Register" />
-        </form>
+    <section>
+      <div class="container-login" id="loginForm">
+        <div class="wrapper">
+          <div class="title"><span>Login Form</span></div>
+          <form action="#">
+            <div class="row">
+              <i class="fas fa-user"></i>
+              <input
+                type="email"
+                id="loginEmail"
+                name="email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="row button">
+              <input type="submit" value="Login" />
+            </div>
+            <div class="signup-link">
+              Not a member? <a href="register.html">Signup now</a>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <!-- Login Form -->
-     <div class="form login">
-        <header>Login</header>
-    <form action="#" id="loginForm">
-      <input
-        type="email"
-        id="loginEmail"
-        name="email"
-        placeholder="Email"
-        required
-      />
-      <input
-        type="password"
-        id="loginPassword"
-        name="password"
-        placeholder="Password"
-        required
-      />
-      <input type="submit" value="Login" />
-      <p>
-        Don't have an account?
-        <a class="login-link" href="#" id="registerLink">Register</a>
-      </p>
-    </form>
-  </div>
     </section>
 
-    <script>
-      const wrapper = document.querySelector(".wrapper"),
-        signupHeader = document.querySelector(".signup header"),
-        loginHeader = document.querySelector(".login header"),
-        loginLink = document.getElementById("loginLink"),
-        registerLink = document.getElementById("registerLink");
-
-      wrapper.classList.add("active");
-
-      loginHeader.addEventListener("click", () => {
-        wrapper.classList.add("active");
-      });
-
-      signupHeader.addEventListener("click", () => {
-        wrapper.classList.remove("active");
-      });
-
-      loginLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        wrapper.classList.add("active");
-      });
-
-      registerLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        wrapper.classList.remove("active");
-      });
-    </script>
-    <script src="../src/js/register.js"></script>
     <script src="../src/js/login.js"></script>
   </body>
 </html>

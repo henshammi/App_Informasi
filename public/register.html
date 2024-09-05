@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/logreg.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
+    <title>Register</title>
+  </head>
+  <body>
+    <section>
+      <div class="container" id="registerForm">
+        <div class="wrapper">
+          <div class="title"><span>Register Form</span></div>
+          <form action="#">
+            <div class="row">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Full name"
+                required
+              />
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email address"
+                required
+              />
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input
+                type="text"
+                id="alamat"
+                name="alamat"
+                placeholder="Alamat"
+                required
+              />
+            </div>
+            <div class="row">
+              <i class="fas fa-lock"></i>
+              <input
+                type="number"
+                id="no_hp"
+                name="no_hp"
+                placeholder="No handphone"
+                required
+              />
+            </div>
+            <div class="row button">
+              <input type="submit" value="Register" />
+            </div>
+            <div class="signup-link">
+              udah punya akun mah login aja dek!
+              <a href="login.html">Login now</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script src="../src/js/register.js"></script>
+  </body>
+</html>

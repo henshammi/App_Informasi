@@ -279,7 +279,8 @@ th {
   padding-top: 50px;
   padding-right: 20px;
   padding-left: 20px;
-  background: linear-gradient(45deg, #3a3750, #7e4ca4);
+  background: linear-gradient(90deg, #8e1d9e, #b764c5);
+
   left: 78px;
   width: calc(100% - 78px);
   transition: all 0.5s ease;
