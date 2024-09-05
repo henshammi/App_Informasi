@@ -169,3 +169,35 @@ img {
 .gambar-item {
   align-content: center;
 }
+
+/* Gaya untuk ikon informasi */
+.info-icon {
+  position: relative;
+  display: inline-block;
+  margin-left: 100%;
+  bottom: 70px;
+  font-size: 26px; /* Ukuran ikon info */
+}
+
+.text-info {
+  font-size: 15px;
+}
+.info-box {
+  display: none; /* Awalnya tersembunyi */
+  position: absolute;
+  top: 30px;
+  left: -200px;
+  width: 250px;
+  background-color: #f9f9f9;
+  color: black;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tampilkan kotak informasi saat dihover */
+.info-icon:hover .info-box {
+  display: block;
+}

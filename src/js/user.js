@@ -18,6 +18,14 @@ function fetchItems() {
     })
     .catch((error) => console.error("Error fetching items:", error));
 }
+function formatHarga(harga) {
+  return parseFloat(harga).toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  });
+}
 
 function displayItems() {
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -40,15 +48,11 @@ function displayItems() {
                             (item) => `
                             <tr>
                                 <td>${item.name}</td>
-                                <td>${item.harga}</td>
+                                <td>${formatHarga(item.harga)}</td>
                                 <td>${item.tanggal}</td>
                                 <td><img src="${
-                                  item.gambar
-                                    ? `data:image/jpeg;base64,${item.gambar}`
-                                    : "default.jpg"
-                                }" alt="${
-                              item.name
-                            }" style="width: 50px; height: 50px;"></td>
+                                  item.gambar ? `data:image/jpeg;base64,${item.gambar}` : "default.jpg"
+                                }" alt="${item.name}" style="width: 50px; height: 50px;"></td>
                             </tr>
                         `
                           )
@@ -71,15 +75,13 @@ function displayItems() {
 
         <div class="grid-item"> 
           <div class="gambar-item">
-            <img src="${
-              item.gambar
-                ? `data:image/jpeg;base64,${item.gambar}`
-                : "default.jpg"
-            }" alt="${item.name}" style="width: 70px; height: 70px;">
+            <img src="${item.gambar ? `data:image/jpeg;base64,${item.gambar}` : "default.jpg"}" alt="${
+          item.name
+        }" style="width: 70px; height: 70px;">
           </div>
           <div class="grid-item-v2">
             <div class="harga-item">
-              <h2>Rp.${item.harga},00</h2>
+              <h2>${formatHarga(item.harga)}</h2>
               <p class="desc-item">/KG</p>
             </div>
             <div class="tanggal-item">            
@@ -121,8 +123,7 @@ function searchItems() {
 
 function filterItems(searchTerm = "") {
   const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;
-  const maxPrice =
-    parseFloat(document.getElementById("maxPrice").value) || Infinity;
+  const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
   const startDate = document.getElementById("startDate").value;
   const endDate = document.getElementById("endDate").value;
 
@@ -131,8 +132,7 @@ function filterItems(searchTerm = "") {
     const tanggal = item.tanggal;
 
     const isWithinPriceRange = harga >= minPrice && harga <= maxPrice;
-    const isWithinDateRange =
-      (!startDate || tanggal >= startDate) && (!endDate || tanggal <= endDate);
+    const isWithinDateRange = (!startDate || tanggal >= startDate) && (!endDate || tanggal <= endDate);
     const matchesSearchTerm = item.name.toLowerCase().includes(searchTerm);
 
     return isWithinPriceRange && isWithinDateRange && matchesSearchTerm;
