@@ -7,6 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  function showNotification(message, type) {
+    const notificationElement = document.getElementById("notification");
+    notificationElement.textContent = message;
+    notificationElement.className = `notification ${type} hide`; // Mulai dari posisi tersembunyi
+    notificationElement.style.display = "block"; // Tampilkan elemen terlebih dahulu
+
+    // Gunakan setTimeout untuk memicu perubahan animasi
+    setTimeout(() => {
+      notificationElement.classList.remove("hide");
+      notificationElement.classList.add("show"); // Tambahkan kelas 'show' untuk animasi muncul
+    }, 10); // Timeout kecil agar transisi terjadi
+
+    // Setelah 3 detik, sembunyikan notifikasi lagi
+    setTimeout(() => {
+      notificationElement.classList.remove("show");
+      notificationElement.classList.add("hide");
+      setTimeout(() => {
+        notificationElement.style.display = "none"; // Sembunyikan setelah animasi keluar
+        notificationElement.classList.remove("hide");
+      }, 500); // Waktu ini harus sesuai dengan durasi transisi
+    }, 3000); // Tampilkan notifikasi selama 3 detik
+  }
+
   // Jika pengguna sudah login, lanjutkan dengan inisialisasi form dan event listener
   document.getElementById("bahanForm").addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -40,17 +63,17 @@ document.addEventListener("DOMContentLoaded", () => {
           const result = await response.json();
 
           if (response.ok) {
-            document.getElementById("message").textContent = result.message;
-            document.getElementById("bahanForm").reset(); // Reset form setelah berhasil
+            showNotification("Berhasil menginputkan data", "success");
           } else {
-            document.getElementById("message").textContent = result.error;
+            showNotification(result.error, "error");
           }
         } catch (error) {
           console.error("Error:", error);
-          document.getElementById("message").textContent = "Internal server error.";
+          showNotification("Terjadi kesalahan pada server.", "error");
         } finally {
           // Menyembunyikan animasi loading setelah selesai
           document.getElementById("loading").style.display = "none";
+          document.getElementById("bahanForm").reset(); // Reset form setelah selesai
         }
       };
 
@@ -74,17 +97,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const result = await response.json();
 
         if (response.ok) {
-          document.getElementById("message").textContent = result.message;
-          document.getElementById("bahanForm").reset();
+          showNotification("Berhasil menginputkan data", "success");
         } else {
-          document.getElementById("message").textContent = result.error;
+          showNotification(result.error, "error");
         }
       } catch (error) {
         console.error("Error:", error);
-        document.getElementById("message").textContent = "Internal server error.";
+        showNotification("Terjadi kesalahan pada server.", "error");
       } finally {
         // Menyembunyikan animasi loading setelah selesai
         document.getElementById("loading").style.display = "none";
+        document.getElementById("bahanForm").reset(); // Reset form setelah selesai
       }
     }
   });

@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const tableBody = document.querySelector("#bahanTable tbody");
   const notificationElement = document.getElementById("notification");
+  const notification2 = document.getElementById("notification2");
+
   let allItems = [];
   let filteredItems = [];
   let currentPage = 1;
@@ -34,20 +36,42 @@ document.addEventListener("DOMContentLoaded", async () => {
   function showNotification(message, type) {
     const notificationElement = document.getElementById("notification");
     notificationElement.textContent = message;
-    notificationElement.className = `notification ${type} hide`;
-    notificationElement.style.display = "block";
+    notificationElement.className = `notification ${type} hide`; // Mulai dari posisi tersembunyi
+    notificationElement.style.display = "block"; // Tampilkan elemen terlebih dahulu
+
+    // Gunakan setTimeout untuk memicu perubahan animasi
     setTimeout(() => {
       notificationElement.classList.remove("hide");
-      notificationElement.classList.add("show");
-    }, 10);
+      notificationElement.classList.add("show"); // Tambahkan kelas 'show' untuk animasi muncul
+    }, 10); // Timeout kecil agar transisi terjadi
+
+    // Setelah 3 detik, sembunyikan notifikasi lagi
     setTimeout(() => {
       notificationElement.classList.remove("show");
       notificationElement.classList.add("hide");
       setTimeout(() => {
-        notificationElement.style.display = "none";
+        notificationElement.style.display = "none"; // Sembunyikan setelah animasi keluar
         notificationElement.classList.remove("hide");
-      }, 500);
-    }, 3000);
+      }, 500); // Waktu ini harus sesuai dengan durasi transisi
+    }, 3000); // Tampilkan notifikasi selama 3 detik
+  }
+
+  //notif login
+  function showNotification2(message, isSuccess = true) {
+    notification2.textContent = message;
+    notification2.classList.remove("hidden", "success", "error");
+    notification2.classList.add(isSuccess ? "success" : "error", "visible");
+
+    setTimeout(() => {
+      notification2.classList.remove("visible");
+      notification2.classList.add("hidden");
+    }, 5000);
+  }
+
+  const loginSuccess = localStorage.getItem("loginSuccess");
+  if (loginSuccess) {
+    showNotification2(loginSuccess, true);
+    localStorage.removeItem("loginSuccess"); // Hapus pesan setelah ditampilkan
   }
 
   function displayItems() {

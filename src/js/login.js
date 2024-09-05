@@ -1,37 +1,72 @@
-document.getElementById("loginForm").addEventListener("submit", async (event) => {
-  event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const notification = document.getElementById("notification");
 
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value.trim();
+  function showNotification(message, isSuccess = true) {
+    notification.textContent = message;
+    notification.classList.remove("hidden", "success", "error");
+    notification.classList.add(isSuccess ? "success" : "error", "visible");
 
-  if (!email || !password) {
-    alert("Email dan password harus diisi.");
-    return;
+    setTimeout(() => {
+      notification.classList.remove("visible");
+      notification.classList.add("hidden");
+    }, 5000);
   }
 
-  try {
-    const response = await fetch("https://serverbapokbeta.vercel.app/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
+  // Cek apakah ada pesan sukses dari halaman register
+  const registrationSuccess = localStorage.getItem("registrationSuccess");
+  if (registrationSuccess) {
+    showNotification(registrationSuccess, true);
+    localStorage.removeItem("registrationSuccess"); // Hapus pesan setelah ditampilkan
+  }
+
+  const loginForm = document.getElementById("loginForm");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      if (!email || !password) {
+        showNotification("Email dan password harus diisi.", false);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "https://serverbapokbeta.vercel.app/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          }
+        );
+
+        const result = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem("userId", result.userId);
+          localStorage.setItem("userName", result.userName);
+
+          localStorage.setItem(
+            "loginSuccess",
+            `Login berhasil! Selamat datang, ${result.userName}`
+          );
+          window.location.href = "index.html";
+        } else {
+          showNotification(
+            `Login gagal: masukkan username atau password dengan benar!`,
+            false
+          );
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        showNotification("Terjadi kesalahan. Silakan coba lagi nanti.", false);
+      }
     });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      // Menyimpan token atau informasi user ke localStorage
-      localStorage.setItem("userId", result.userId);
-      localStorage.setItem("userName", result.userName);
-
-      alert(`Login berhasil! Selamat datang, ${result.userName}`);
-      window.location.href = "index.html"; // Redirect ke halaman utama
-    } else {
-      alert(`Login gagal: ${result.error}`);
-    }
-  } catch (error) {
-    console.error("Error during login:", error);
-    alert("Terjadi kesalahan. Silakan coba lagi nanti.");
+  } else {
+    console.error("Login form not found!");
   }
 });
