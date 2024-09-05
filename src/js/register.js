@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Simpan notifikasi ke localStorage
           localStorage.setItem(
             "registrationSuccess",
-            "Registration successful! You can now login."
+            "Registrasi sukses! Silahkan login."
           );
           window.location.href = "login.html"; // Redirect ke halaman login
         } else {
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } catch (error) {
         console.error("Error during registration:", error);
-        showNotification("An error occurred. Please try again later.", false);
+        showNotification("Terjadi kesalahan. Silahkan coba lagi nanti.", false);
       }
     });
   } else {

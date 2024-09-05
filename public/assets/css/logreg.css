@@ -120,29 +120,30 @@ form .signup-link a:hover {
   top: 20px;
   right: 20px;
   padding: 10px 20px;
+  width: auto;
+  max-width: 300px;
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  display: none;
   z-index: 1000;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .notification.success {
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-  color: #155724;
+  border-color: #4caf50;
+  background-color: #4caf50;
+  color: white;
 }
 
 .notification.error {
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-  color: #721c24;
+  background-color: #f44336;
+  border-color: #f44336;
+  color: white;
 }
 
-.hidden {
-  display: none;
-}
-
-.visible {
-  display: block;
+.notification.visible {
+  opacity: 1;
+  transform: translateX(0);
 }

@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const loginForm = document.getElementById("loginForm");
+
   if (loginForm) {
     loginForm.addEventListener("submit", async function (event) {
       event.preventDefault();
@@ -49,13 +50,16 @@ document.addEventListener("DOMContentLoaded", function () {
           localStorage.setItem("userId", result.userId);
           localStorage.setItem("userName", result.userName);
 
-          showNotification(
-            `Login berhasil! Selamat datang, ${result.userName}`,
-            true
+          localStorage.setItem(
+            "loginSuccess",
+            `Login berhasil! Selamat datang, ${result.userName}`
           );
-          window.location.href = "index.html"; // Redirect ke halaman utama
+          window.location.href = "index.html";
         } else {
-          showNotification(`Login gagal: ${result.error}`, false);
+          showNotification(
+            `Login gagal: masukkan username atau password dengan benar!`,
+            false
+          );
         }
       } catch (error) {
         console.error("Error during login:", error);

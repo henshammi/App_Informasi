@@ -360,7 +360,7 @@ th {
   color: white;
   text-align: center;
   opacity: 0; /* Initially hidden */
-  transform: translateX(100%); /* Start from right outside the screen */
+  transform: translateX(100%); /* Awalnya berada sedikit di atas */
   transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for animation */
 }
 
@@ -382,4 +382,38 @@ th {
 .notification.hide {
   opacity: 0; /* Hide */
   transform: translateX(100%); /* Move out of view */
+}
+
+/* notif login */
+.notification2 {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  width: auto;
+  max-width: 300px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.notification2.success {
+  border-color: #4caf50;
+  background-color: #4caf50;
+  color: white;
+}
+
+.notification2.error {
+  background-color: #f44336;
+  border-color: #f44336;
+  color: white;
+}
+
+.notification2.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
