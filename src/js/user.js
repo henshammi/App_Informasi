@@ -1,4 +1,4 @@
-let itemsPerPage = 5;
+let itemsPerPage = 12;
 let currentPage = 1;
 let allItems = [];
 let filteredItems = [];
@@ -43,8 +43,12 @@ function displayItems() {
                                 <td>${item.harga}</td>
                                 <td>${item.tanggal}</td>
                                 <td><img src="${
-                                  item.gambar ? `data:image/jpeg;base64,${item.gambar}` : "default.jpg"
-                                }" alt="${item.name}" style="width: 50px; height: 50px;"></td>
+                                  item.gambar
+                                    ? `data:image/jpeg;base64,${item.gambar}`
+                                    : "default.jpg"
+                                }" alt="${
+                              item.name
+                            }" style="width: 50px; height: 50px;"></td>
                             </tr>
                         `
                           )
@@ -54,6 +58,41 @@ function displayItems() {
             `;
 
   document.getElementById("itemsTable").innerHTML = table;
+
+  const bahanContainer = document.querySelector(".bahan");
+  if (bahanContainer) {
+    bahanContainer.innerHTML = itemsToDisplay
+      .map(
+        (item) => `
+      <div class="bahan-item">
+        <div class="nama-item">
+          <h2>${item.name}</h2>
+        </div>
+
+        <div class="grid-item"> 
+          <div class="gambar-item">
+            <img src="${
+              item.gambar
+                ? `data:image/jpeg;base64,${item.gambar}`
+                : "default.jpg"
+            }" alt="${item.name}" style="width: 70px; height: 70px;">
+          </div>
+          <div class="grid-item-v2">
+            <div class="harga-item">
+              <h2>Rp.${item.harga},00</h2>
+              <p class="desc-item">/KG</p>
+            </div>
+            <div class="tanggal-item">            
+              <p>${item.tanggal}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    `
+      )
+      .join("");
+  }
 }
 
 function setupPagination() {
@@ -82,7 +121,8 @@ function searchItems() {
 
 function filterItems(searchTerm = "") {
   const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;
-  const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
+  const maxPrice =
+    parseFloat(document.getElementById("maxPrice").value) || Infinity;
   const startDate = document.getElementById("startDate").value;
   const endDate = document.getElementById("endDate").value;
 
@@ -91,7 +131,8 @@ function filterItems(searchTerm = "") {
     const tanggal = item.tanggal;
 
     const isWithinPriceRange = harga >= minPrice && harga <= maxPrice;
-    const isWithinDateRange = (!startDate || tanggal >= startDate) && (!endDate || tanggal <= endDate);
+    const isWithinDateRange =
+      (!startDate || tanggal >= startDate) && (!endDate || tanggal <= endDate);
     const matchesSearchTerm = item.name.toLowerCase().includes(searchTerm);
 
     return isWithinPriceRange && isWithinDateRange && matchesSearchTerm;

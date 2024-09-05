@@ -1,27 +1,61 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
+  padding-top: 50px;
+  background: linear-gradient(45deg, #3a3750, #7e4ca4);
 }
 
 .container {
-  max-width: 800px;
+  max-width: 80vw;
   margin: auto;
-  background: white;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  padding: 50px;
+  padding-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
+  color: #343a40;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  margin-bottom: 20px;
 }
 
 #searchInput {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
   font-size: 16px;
+  box-sizing: border-box;
+}
+
+.filters {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-group label {
+  font-weight: bold;
+}
+
+.filter-group input {
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 table {
@@ -33,7 +67,7 @@ table {
 table,
 th,
 td {
-  border: 1px solid #ddd;
+  border: 1px solid #dee2e6;
 }
 
 th,
@@ -43,24 +77,95 @@ td {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #e9ecef;
 }
 
 img {
   max-width: 100px;
   height: auto;
+  border-radius: 4px;
 }
 
 .pagination-button {
   margin: 2px;
-  padding: 8px 16px;
+  padding: 10px 20px;
   background-color: #007bff;
   color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
 }
 
 .pagination-button.disabled {
-  background-color: #ddd;
+  background-color: #ced4da;
   cursor: not-allowed;
+}
+
+.bahan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  /* padding-top: 20px; */
+  padding-bottom: 50px;
+}
+
+.bahan-item {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: calc(25% - 15px);
+  max-width: calc(25% - 15px);
+  box-sizing: border-box;
+}
+
+.grid-item {
+  display: flex;
+  gap: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.grid-item-v2 {
+  padding: 0;
+  margin: 0;
+  text-align: end;
+  width: 100%;
+}
+
+.nama-item {
+  text-align: center;
+  background-color: #7e4ca4;
+  color: white;
+  font-size: 13px;
+  padding: 10px;
+}
+
+.nama-item h2 {
+  margin: 0;
+}
+
+.harga-item h2 {
+  font-size: 25px;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.desc-item {
+  margin: 0;
+  font-size: 15px;
+}
+
+.tanggal-item p {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.gambar-item {
+  align-content: center;
 }

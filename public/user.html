@@ -9,24 +9,40 @@
   <body>
     <div class="container">
       <h1>Daftar Bahan Pokok</h1>
-      <input type="text" id="searchInput" placeholder="Cari berdasarkan nama..." onkeyup="searchItems()" />
-      <div>
-        <label for="priceFilter">Filter Harga:</label>
-        <input type="number" id="minPrice" placeholder="Harga Minimum" onkeyup="filterItems()" />
-        <input type="number" id="maxPrice" placeholder="Harga Maksimum" onkeyup="filterItems()" />
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari berdasarkan nama..."
+          onkeyup="searchItems()"
+        />
+      </div>
+      <div class="filters">
+        <div class="filter-group">
+          <label for="priceFilter">Filter Harga:</label>
+          <input
+            type="number"
+            id="minPrice"
+            placeholder="Harga Minimum"
+            onkeyup="filterItems()"
+          />
+          <input
+            type="number"
+            id="maxPrice"
+            placeholder="Harga Maksimum"
+            onkeyup="filterItems()"
+          />
+        </div>
+        <div class="filter-group">
+          <label for="dateFilter">Filter Tanggal:</label>
+          <input type="date" id="startDate" onchange="filterItems()" />
+          <input type="date" id="endDate" onchange="filterItems()" />
+        </div>
       </div>
 
-      <div>
-        <label for="dateFilter">Filter Tanggal:</label>
-        <input type="date" id="startDate" onchange="filterItems()" />
-        <input type="date" id="endDate" onchange="filterItems()" />
-      </div>
-      <div id="itemsTable">
-        <!-- Table content will be dynamically inserted here -->
-      </div>
-      <div id="pagination">
-        <!-- Pagination buttons will be dynamically inserted here -->
-      </div>
+      <div id="itemsTable" class="bahan">nama bahan</div>
+
+      <div id="pagination"></div>
     </div>
     <script src="../src/js/user.js"></script>
   </body>
