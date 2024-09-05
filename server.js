@@ -1,5 +1,3 @@
-// server.js
-
 const express = require("express");
 const { createClient } = require("@supabase/supabase-js");
 const cors = require("cors");
@@ -52,6 +50,11 @@ app.get("/items", async (req, res) => {
     console.error("Internal server error:", err);
     res.status(500).json({ error: "Internal server error." });
   }
+});
+
+// Middleware untuk menangani 404
+app.use((req, res, next) => {
+  res.status(404).sendFile(__dirname + "/public/404.html");
 });
 
 app.listen(port, () => {

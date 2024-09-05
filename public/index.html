@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <link rel="stylesheet" href="assets/css/index.css" />
     <title>Dashboard</title>
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
@@ -101,6 +102,7 @@
             placeholder="Harga Minimum"
             onkeyup="filterItems()"
           />
+          -
           <input
             type="number"
             id="maxPrice"
@@ -112,6 +114,7 @@
         <div>
           <label for="dateFilter">Filter Tanggal:</label>
           <input type="date" id="startDate" onchange="filterItems()" />
+          -
           <input type="date" id="endDate" onchange="filterItems()" />
         </div>
         <!-- tabel -->
@@ -130,11 +133,18 @@
             <tbody id="bahanBody"></tbody>
           </table>
         </div>
+        <div id="notification" class="notification" style="display: none"></div>
+        <div id="pagination"></div>
       </div>
-      <div id="pagination"></div>
+      <div id="confirmModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Apakah Anda yakin ingin menghapus item ini?</p>
+          <button id="confirmYes">Yes</button>
+          <button id="confirmNo">No</button>
+        </div>
+      </div>
     </section>
-    <div id="notification" class="notification" style="display: none"></div>
-
     <script>
       const userId = localStorage.getItem("userId");
       const userName = localStorage.getItem("userName");

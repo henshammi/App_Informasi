@@ -33,12 +33,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function showNotification(message, type) {
     notificationElement.textContent = message;
-    notificationElement.className = `notification ${type}`;
+    notificationElement.className = `notification ${type} show`;
     notificationElement.style.display = "block";
 
     setTimeout(() => {
-      notificationElement.style.display = "none";
-    }, 3000); // Hide after 3 seconds
+      notificationElement.classList.remove("show");
+      notificationElement.classList.add("hide");
+      setTimeout(() => {
+        notificationElement.style.display = "none";
+        notificationElement.classList.remove("hide");
+      }, 500); // Time should match the transition duration
+    }, 3000); // Show notification for 3 seconds
   }
 
   function displayItems() {
@@ -60,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td>${item.harga ? `Rp ${item.harga.toLocaleString("id-ID")}` : "Harga tidak tersedia"}</td>
         <td>${item.tanggal || "Tanggal tidak tersedia"}</td>
         <td><img src="${imgSrc}" alt="${item.name}" style="width: 50px; height: 50px;"></td>
-        <td><button onclick="deleteItem(${item.id})">Delete</button></td>
+        <td><button onclick="confirmDeleteItem(${item.id})">Delete</button></td>
       `;
 
       tableBody.appendChild(row);
@@ -110,30 +115,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupPagination();
   };
 
-  window.deleteItem = async function (itemId) {
-    const confirmation = confirm("Apakah Anda yakin ingin menghapus item ini?");
+  function showConfirmModal(itemId) {
+    const modal = document.getElementById("confirmModal");
+    const confirmYesButton = document.getElementById("confirmYes");
+    const confirmNoButton = document.getElementById("confirmNo");
+    const closeModal = document.querySelector(".modal .close");
 
-    if (!confirmation) {
-      return;
-    }
+    modal.style.display = "block";
 
-    try {
-      const response = await fetch(`https://serverbapokbeta.vercel.app/items/${itemId}`, {
-        method: "DELETE",
-      });
+    confirmYesButton.onclick = async () => {
+      modal.style.display = "none";
+      try {
+        const response = await fetch(`https://serverbapokbeta.vercel.app/items/${itemId}`, {
+          method: "DELETE",
+        });
 
-      if (response.ok) {
-        await fetchItems();
-        showNotification("Item berhasil dihapus", "success");
-      } else {
-        const errorData = await response.json();
-        showNotification("Gagal menghapus item", "error");
-        console.error("Failed to delete item:", errorData.error);
+        if (response.ok) {
+          await fetchItems();
+          showNotification("Item berhasil dihapus", "success");
+        } else {
+          const errorData = await response.json();
+          showNotification("Gagal menghapus item", "error");
+          console.error("Failed to delete item:", errorData.error);
+        }
+      } catch (error) {
+        showNotification("Terjadi kesalahan saat menghapus item", "error");
+        console.error("Error deleting item:", error);
       }
-    } catch (error) {
-      showNotification("Terjadi kesalahan saat menghapus item", "error");
-      console.error("Error deleting item:", error);
-    }
+    };
+
+    confirmNoButton.onclick = () => {
+      modal.style.display = "none";
+    };
+
+    closeModal.onclick = () => {
+      modal.style.display = "none";
+    };
+  }
+
+  window.confirmDeleteItem = function (itemId) {
+    showConfirmModal(itemId);
   };
 
   // Event listeners for filter inputs
