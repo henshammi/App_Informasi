@@ -85,22 +85,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       const row = document.createElement("tr");
 
       // Convert the Base64 string to a Data URL
-      const imgSrc = item.gambar
-        ? `data:image/jpeg;base64,${item.gambar}`
-        : "default.jpg";
+      const imgSrc = item.gambar ? `data:image/jpeg;base64,${item.gambar}` : "default.jpg";
 
       row.innerHTML = `
         <td>${startIndex + index + 1}</td>
         <td>${item.name || "Nama tidak tersedia"}</td>
-        <td>${
-          item.harga
-            ? `Rp ${item.harga.toLocaleString("id-ID")}`
-            : "Harga tidak tersedia"
-        }</td>
+        <td>${item.harga ? `Rp ${item.harga.toLocaleString("id-ID")}` : "Harga tidak tersedia"}</td>
         <td>${item.tanggal || "Tanggal tidak tersedia"}</td>
-        <td><img src="${imgSrc}" alt="${
-        item.name
-      }" style="width: 50px; height: 50px;"></td>
+        <td><img src="${imgSrc}" alt="${item.name}" style="width: 50px; height: 50px;"></td>
         <td><button onclick="confirmDeleteItem(${item.id})">Delete</button></td>
       `;
 
@@ -160,12 +152,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   window.filterItems = function () {
-    const searchTerm = document
-      .getElementById("searchInput")
-      .value.toLowerCase();
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
     const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;
-    const maxPrice =
-      parseFloat(document.getElementById("maxPrice").value) || Infinity;
+    const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
     const startDate = document.getElementById("startDate").value;
     const endDate = document.getElementById("endDate").value;
 
@@ -174,9 +163,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const tanggal = item.tanggal;
 
       const isWithinPriceRange = harga >= minPrice && harga <= maxPrice;
-      const isWithinDateRange =
-        (!startDate || tanggal >= startDate) &&
-        (!endDate || tanggal <= endDate);
+      const isWithinDateRange = (!startDate || tanggal >= startDate) && (!endDate || tanggal <= endDate);
       const matchesSearchTerm = item.name.toLowerCase().includes(searchTerm);
 
       return isWithinPriceRange && isWithinDateRange && matchesSearchTerm;
@@ -198,12 +185,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     confirmYesButton.onclick = async () => {
       modal.style.display = "none";
       try {
-        const response = await fetch(
-          `https://serverbapokbeta.vercel.app/items/${itemId}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`https://serverbapokbeta.vercel.app/items/${itemId}`, {
+          method: "DELETE",
+        });
 
         if (response.ok) {
           await fetchItems();
@@ -233,21 +217,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   // Event listeners for filter inputs
-  document
-    .getElementById("searchInput")
-    .addEventListener("keyup", window.filterItems);
-  document
-    .getElementById("minPrice")
-    .addEventListener("input", window.filterItems);
-  document
-    .getElementById("maxPrice")
-    .addEventListener("input", window.filterItems);
-  document
-    .getElementById("startDate")
-    .addEventListener("change", window.filterItems);
-  document
-    .getElementById("endDate")
-    .addEventListener("change", window.filterItems);
+  document.getElementById("searchInput").addEventListener("keyup", window.filterItems);
+  document.getElementById("minPrice").addEventListener("input", window.filterItems);
+  document.getElementById("maxPrice").addEventListener("input", window.filterItems);
+  document.getElementById("startDate").addEventListener("change", window.filterItems);
+  document.getElementById("endDate").addEventListener("change", window.filterItems);
 
   // Fetch items on page load
   await fetchItems();

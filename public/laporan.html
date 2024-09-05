@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/dashboard.css" />
+    <link rel="stylesheet" href="./assets/css/laporan.css" />
     <title>Laporan</title>
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -93,13 +94,13 @@
           <label for="endDate">Tanggal Akhir:</label>
           <input type="date" id="endDate" />
         </div>
-        <button onclick="generateReport()">Generate</button>
 
+        <button onclick="generateReport()">Generate</button>
+        <button id="generatePdf">Cetak Laporan</button>
         <div id="reportContainer">
           <!-- Hasil laporan akan muncul di sini -->
         </div>
       </div>
-      <button id="generatePdf">Generate PDF</button>
     </section>
     <div id="notification" class="notification" style="display: none"></div>
     <script>

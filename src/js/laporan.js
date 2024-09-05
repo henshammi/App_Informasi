@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const userId = localStorage.getItem("userId");
+  const generatePdfButton = document.getElementById("generatePdf");
+
+  // Sembunyikan tombol "Generate PDF" saat halaman dimuat
+  generatePdfButton.style.display = "none";
+
+  // Simpan tanggal inputan secara global
+  let startDate = "";
+  let endDate = "";
 
   if (!userId) {
     window.location.href = "login.html";
@@ -7,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function generateReport() {
-    const startDate = document.getElementById("startDate").value;
-    const endDate = document.getElementById("endDate").value;
+    startDate = document.getElementById("startDate").value;
+    endDate = document.getElementById("endDate").value;
 
     if (!startDate || !endDate) {
       alert("Harap masukkan tanggal mulai dan tanggal akhir.");
@@ -23,11 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         displayReport(data);
+        // Tampilkan tombol "Generate PDF" setelah laporan berhasil ditampilkan
+        generatePdfButton.style.display = "block";
       } else {
         console.error(data.error);
+        generatePdfButton.style.display = "none"; // Sembunyikan tombol jika ada error
       }
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
+      generatePdfButton.style.display = "none"; // Sembunyikan tombol jika terjadi kesalahan
     }
   }
 
@@ -72,9 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
     pdf.setFontSize(16);
     pdf.text("Laporan Harga Bahan Pokok", 14, 20);
 
+    // Tambahkan tanggal inputan ke dalam PDF
+    pdf.setFontSize(12);
+    pdf.text(`Dari tanggal: ${startDate}`, 14, 30);
+    pdf.text(`Sampai Tanggal: ${endDate}`, 14, 40);
+
     const table = document.querySelector("table");
     if (table) {
-      pdf.autoTable({ html: table, startY: 30 });
+      pdf.autoTable({ html: table, startY: 50 }); // Sesuaikan posisi tabel
     }
 
     pdf.save("laporan.pdf");
