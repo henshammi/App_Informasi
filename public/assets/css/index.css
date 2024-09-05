@@ -68,7 +68,7 @@ td:last-child {
 
 /* Action button styling */
 button {
-  background-color: #27ae60;
+  background-color: rgb(194, 29, 29);
   color: #ffffff;
   border: none;
   padding: 10px 15px;
@@ -79,7 +79,7 @@ button {
 }
 
 button:hover {
-  background-color: #219150;
+  background-color: rgb(98, 18, 18);
 }
 
 /* Pagination styling */

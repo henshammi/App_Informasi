@@ -3,21 +3,6 @@ let currentPage = 1;
 let allItems = [];
 let filteredItems = [];
 
-window.onload = function () {
-  fetchItems();
-};
-
-function fetchItems() {
-  fetch("http://localhost:3000/items")
-    .then((response) => response.json())
-    .then((data) => {
-      allItems = data;
-      filteredItems = allItems;
-      displayItems();
-      setupPagination();
-    })
-    .catch((error) => console.error("Error fetching items:", error));
-}
 function formatHarga(harga) {
   return parseFloat(harga).toLocaleString("id-ID", {
     style: "currency",

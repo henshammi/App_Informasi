@@ -49,10 +49,13 @@ button:hover {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  display: block;
-  margin: 20px auto 0; /* Margin auto untuk pusatkan tombol */
 }
 
 #generatePdf:hover {
   background-color: #218838;
+}
+
+.btn-cetak {
+  justify-content: flex-end;
+  display: flex;
 }

@@ -1,6 +1,7 @@
 /* tabel */
 .table-container {
   flex-grow: 1;
+  width: 100%;
 }
 
 table {
@@ -18,7 +19,7 @@ td {
 }
 
 th {
-  background-color: #007bff;
+  background-color: #a74d9d;
   color: white;
 }
 
@@ -39,7 +40,7 @@ th {
 
 /* sidebar */
 /* Google Font Link */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"); */
 * {
   margin: 0;
   padding: 0;
@@ -298,11 +299,7 @@ th {
   color: #11101d;
   font-size: 25px;
   font-weight: bold;
-  margin: 18px;
-}
-
-.home-section .table-container {
-  margin: 18px;
+  padding-right: 30px;
 }
 
 @media (max-width: 420px) {
@@ -313,11 +310,11 @@ th {
 
 .container-box {
   background: #fff;
-  padding: 30px;
+  padding: 50px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: calc(100% - 78px);
-  margin-bottom: 250px;
+  margin-bottom: 50px;
 }
 
 .sidebar li .tooltip-logout {
@@ -359,7 +356,7 @@ th {
 }
 
 .pagination-button {
-  background-color: #007bff;
+  background-color: black;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -370,7 +367,7 @@ th {
 }
 
 .pagination-button:hover {
-  background-color: #0056b3;
+  background-color: rgb(74, 74, 74);
 }
 
 .pagination-info {
@@ -452,4 +449,60 @@ th {
 .notification2.visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+.container-grafik {
+  display: flex;
+  padding-top: 20px;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Text styling */
+.text {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Label styling */
+label {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Input and select styling */
+input[type="month"],
+select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  min-width: 10vw;
+}
+
+/* Button styling */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Button hover and active states */
+button:hover {
+  background-color: #0056b3;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+canvas {
+  padding-top: 30px;
 }
