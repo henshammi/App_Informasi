@@ -8,6 +8,7 @@
     <title>Dashboard</title>
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
   </head>
@@ -87,28 +88,13 @@
     <section class="home-section">
       <div class="container-box">
         <div class="text">Daftar Bahan Pokok</div>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Cari berdasarkan nama..."
-          onkeyup="filterItems()"
-        />
+        <input type="text" id="searchInput" placeholder="Cari berdasarkan nama..." onkeyup="filterItems()" />
 
         <div>
           <label for="priceFilter">Filter Harga:</label>
-          <input
-            type="number"
-            id="minPrice"
-            placeholder="Harga Minimum"
-            onkeyup="filterItems()"
-          />
+          <input type="number" id="minPrice" placeholder="Harga Minimum" onkeyup="filterItems()" />
           -
-          <input
-            type="number"
-            id="maxPrice"
-            placeholder="Harga Maksimum"
-            onkeyup="filterItems()"
-          />
+          <input type="number" id="maxPrice" placeholder="Harga Maksimum" onkeyup="filterItems()" />
         </div>
 
         <div>
@@ -134,7 +120,10 @@
           </table>
         </div>
         <div id="notification" class="notification" style="display: none"></div>
-        <div id="pagination"></div>
+        <div id="pagination">
+          <div id="pagination-buttons"></div>
+          <div id="pagination-info"></div>
+        </div>
       </div>
       <div id="confirmModal" class="modal">
         <div class="modal-content">

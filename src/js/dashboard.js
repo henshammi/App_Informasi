@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let allItems = [];
   let filteredItems = [];
   let currentPage = 1;
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   const userId = localStorage.getItem("userId");
   console.log("User ID saat ini:", userId);
@@ -32,18 +32,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function showNotification(message, type) {
+    const notificationElement = document.getElementById("notification");
     notificationElement.textContent = message;
-    notificationElement.className = `notification ${type} show`;
+    notificationElement.className = `notification ${type} hide`;
     notificationElement.style.display = "block";
-
+    setTimeout(() => {
+      notificationElement.classList.remove("hide");
+      notificationElement.classList.add("show");
+    }, 10);
     setTimeout(() => {
       notificationElement.classList.remove("show");
       notificationElement.classList.add("hide");
       setTimeout(() => {
         notificationElement.style.display = "none";
         notificationElement.classList.remove("hide");
-      }, 500); // Time should match the transition duration
-    }, 3000); // Show notification for 3 seconds
+      }, 500);
+    }, 3000);
   }
 
   function displayItems() {
@@ -76,13 +80,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
     let paginationHTML = "";
 
-    for (let i = 1; i <= pageCount; i++) {
-      paginationHTML += `<button class="pagination-button ${
-        i === currentPage ? "disabled" : ""
-      }" onclick="changePage(${i})">${i}</button>`;
+    // Tombol ke halaman pertama
+    if (currentPage > 1) {
+      paginationHTML += `<button class="pagination-button" onclick="changePage(1)">
+                           <i class="fas fa-angle-double-left"></i> First
+                         </button>`;
     }
 
-    document.getElementById("pagination").innerHTML = paginationHTML;
+    // Tombol previous
+    if (currentPage > 1) {
+      paginationHTML += `<button class="pagination-button" onclick="changePage(${currentPage - 1})">
+                            <i class="bx bx-left-arrow-alt"></i>
+                         </button>`;
+    }
+
+    // Tombol next
+    if (currentPage < pageCount) {
+      paginationHTML += `<button class="pagination-button" onclick="changePage(${currentPage + 1})">
+                            <i class="bx bx-right-arrow-alt"></i>
+                         </button>`;
+    }
+
+    // Tombol ke halaman terakhir
+    if (currentPage < pageCount) {
+      paginationHTML += `<button class="pagination-button" onclick="changePage(${pageCount})">
+                           Last <i class="fas fa-angle-double-right"></i>
+                         </button>`;
+    }
+
+    document.getElementById("pagination-buttons").innerHTML = paginationHTML;
+
+    // Tampilkan teks "Page X of Y"
+    document.getElementById("pagination-info").innerHTML = `Page ${currentPage} of ${pageCount}`;
   }
 
   // Add functions to window object to make them accessible globally
