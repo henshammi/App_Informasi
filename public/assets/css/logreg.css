@@ -113,3 +113,36 @@ form .button input:hover {
 form .signup-link a:hover {
   text-decoration: underline;
 }
+
+/* notifikasi */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: none;
+  z-index: 1000;
+}
+
+.notification.success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.notification.error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
