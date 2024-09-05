@@ -314,7 +314,7 @@ th {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: calc(100% - 78px);
-  margin-bottom: 250px;
+  margin-bottom: 50px;
 }
 
 .sidebar li .tooltip-logout {
@@ -452,7 +452,10 @@ th {
 }
 
 .container-grafik {
+  display: flex;
   padding-top: 20px;
+  align-items: center;
+  gap: 10px;
 }
 
 /* Text styling */
@@ -476,6 +479,7 @@ select {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  min-width: 10vw;
 }
 
 /* Button styling */
@@ -497,4 +501,8 @@ button:hover {
 
 button:active {
   transform: scale(0.98);
+}
+
+canvas {
+  padding-top: 30px;
 }
