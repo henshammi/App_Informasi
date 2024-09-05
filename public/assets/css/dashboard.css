@@ -348,6 +348,42 @@ th {
   display: none;
 }
 
+#pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#pagination-buttons {
+  display: flex;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 4px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+}
+
+.pagination-info {
+  font-size: 16px;
+}
+
+.pagination-button:disabled,
+.pagination-button.disabled {
+  background-color: #e0e0e0;
+  color: #888888;
+  cursor: not-allowed;
+}
+
 /* Notification styling */
 .notification {
   position: fixed;

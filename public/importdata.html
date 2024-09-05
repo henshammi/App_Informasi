@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/dashboard.css" />
+    <link rel="stylesheet" href="assets/css/import.css" />
     <title>Import Data</title>
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
   </head>
@@ -83,11 +84,25 @@
     <section class="home-section">
       <div class="container-box">
         <div class="text">Import Data Bahan Pokok</div>
-
+        <!-- Area drag and drop -->
+        <div id="dropZone" class="drop-zone">
+          <p>Seret dan lepaskan file di sini atau klik untuk memilih file</p>
+          <input type="file" id="fileInput" accept=".xlsx" style="display: none" />
+          <div id="fileNameDisplay"></div>
+        </div>
         <form id="importForm" enctype="multipart/form-data">
-          <input type="file" id="fileInput" accept=".xlsx" required />
-          <button type="submit">Import Data</button>
+          <button id="importBtn" type="submit">Import Data</button>
         </form>
+        <!-- Modal untuk konfirmasi -->
+        <div id="confirmationModal" class="modal" style="display: none">
+          <div class="modal-content">
+            <p>
+              Apakah Anda yakin ingin mengimpor data? Pastikan data pada file excel sudah benar sebelum melanjutkan.
+            </p>
+            <button id="confirmBtn">Ya, Lanjutkan</button>
+            <button id="cancelBtn">Batal</button>
+          </div>
+        </div>
 
         <div id="notification" class="notification" style="display: none"></div>
       </div>
