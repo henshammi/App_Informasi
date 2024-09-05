@@ -93,6 +93,7 @@
         <form id="importForm" enctype="multipart/form-data">
           <button id="importBtn" type="submit">Import Data</button>
         </form>
+
         <!-- Modal untuk konfirmasi -->
         <div id="confirmationModal" class="modal" style="display: none">
           <div class="modal-content">
@@ -104,9 +105,16 @@
           </div>
         </div>
 
+        <!-- Loading spinner -->
+        <div id="loading" class="loading" style="display: none">
+          <div class="spinner"></div>
+        </div>
+
+        <!-- Notification element -->
         <div id="notification" class="notification" style="display: none"></div>
       </div>
     </section>
+
     <script>
       const userId = localStorage.getItem("userId");
       const userName = localStorage.getItem("userName");

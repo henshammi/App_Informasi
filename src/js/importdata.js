@@ -7,9 +7,33 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  function showNotification(message, type) {
+    const notificationElement = document.getElementById("notification");
+    notificationElement.textContent = message;
+    notificationElement.className = `notification ${type} hide`; // Mulai dari posisi tersembunyi
+    notificationElement.style.display = "block"; // Tampilkan elemen terlebih dahulu
+
+    // Gunakan setTimeout untuk memicu perubahan animasi
+    setTimeout(() => {
+      notificationElement.classList.remove("hide");
+      notificationElement.classList.add("show"); // Tambahkan kelas 'show' untuk animasi muncul
+    }, 10); // Timeout kecil agar transisi terjadi
+
+    // Setelah 3 detik, sembunyikan notifikasi lagi
+    setTimeout(() => {
+      notificationElement.classList.remove("show");
+      notificationElement.classList.add("hide");
+      setTimeout(() => {
+        notificationElement.style.display = "none"; // Sembunyikan setelah animasi keluar
+        notificationElement.classList.remove("hide");
+      }, 500); // Waktu ini harus sesuai dengan durasi transisi
+    }, 3000); // Tampilkan notifikasi selama 3 detik
+  }
+
   const dropZone = document.getElementById("dropZone");
   const fileInput = document.getElementById("fileInput");
   const fileNameDisplay = document.getElementById("fileNameDisplay");
+
   let file;
 
   // Drag and drop event handlers
@@ -47,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("importForm").addEventListener("submit", async (event) => {
     event.preventDefault(); // Mencegah perilaku default dari form
-
     if (!file) {
       alert("Silakan pilih atau drag file.");
       return;
@@ -60,9 +83,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Pastikan hanya menambahkan event listener sekali
     document.getElementById("confirmBtn").onclick = async () => {
       modal.style.display = "none"; // Tutup modal setelah konfirmasi
+      document.getElementById("loading").style.display = "flex";
 
       try {
         const data = await readExcelFile(file);
+
+        // Periksa apakah data kosong
+        if (data.length === 0) {
+          showNotification("error: File excel tidak boleh kosong", "error");
+          return;
+        }
+
         console.log("Data to be sent:", data);
 
         const json = JSON.stringify(data);
@@ -82,10 +113,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const result = await response.json();
         console.log(result);
-        alert("Data berhasil diimpor!");
+        showNotification("Berhasil menginputkan data", "success");
+        // Reset file input setelah data berhasil diimpor
+        fileInput.value = ""; // Reset file input
+        fileNameDisplay.textContent = ""; // Kosongkan tampilan nama file
+        file = null; // Hapus file dari variabel
       } catch (error) {
         console.error("Error:", error);
-        alert("Terjadi kesalahan.");
+        showNotification("Terjadi kesalahan pada server.", "error");
+      } finally {
+        // Menyembunyikan animasi loading setelah selesai
+        document.getElementById("loading").style.display = "none";
       }
     };
 
