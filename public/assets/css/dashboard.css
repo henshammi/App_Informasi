@@ -1,6 +1,7 @@
 /* tabel */
 .table-container {
   flex-grow: 1;
+  width: 100%;
 }
 
 table {
@@ -18,7 +19,7 @@ td {
 }
 
 th {
-  background-color: #007bff;
+  background-color: #a74d9d;
   color: white;
 }
 
@@ -39,7 +40,7 @@ th {
 
 /* sidebar */
 /* Google Font Link */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"); */
 * {
   margin: 0;
   padding: 0;
@@ -298,11 +299,7 @@ th {
   color: #11101d;
   font-size: 25px;
   font-weight: bold;
-  margin: 18px;
-}
-
-.home-section .table-container {
-  margin: 18px;
+  padding-right: 30px;
 }
 
 @media (max-width: 420px) {
@@ -313,7 +310,7 @@ th {
 
 .container-box {
   background: #fff;
-  padding: 30px;
+  padding: 50px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: calc(100% - 78px);
@@ -359,7 +356,7 @@ th {
 }
 
 .pagination-button {
-  background-color: #007bff;
+  background-color: black;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -370,7 +367,7 @@ th {
 }
 
 .pagination-button:hover {
-  background-color: #0056b3;
+  background-color: rgb(74, 74, 74);
 }
 
 .pagination-info {

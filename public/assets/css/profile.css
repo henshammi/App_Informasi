@@ -66,7 +66,7 @@ body {
 .data h2 {
   font-size: 33px;
   font-weight: 600;
-  color: #4a90e2;
+  color: black;
 }
 
 .data span {
@@ -93,7 +93,7 @@ body {
 .row .info span {
   display: block;
   font-size: 18px;
-  color: #4a90e2;
+  color: black;
 }
 
 .buttons {
