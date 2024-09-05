@@ -113,14 +113,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Tombol previous
     if (currentPage > 1) {
-      paginationHTML += `<button class="pagination-button" onclick="changePage(${currentPage - 1})">
+      paginationHTML += `<button class="pagination-button" onclick="changePage(${
+        currentPage - 1
+      })">
                             <i class="bx bx-left-arrow-alt"></i>
                          </button>`;
     }
 
     // Tombol next
     if (currentPage < pageCount) {
-      paginationHTML += `<button class="pagination-button" onclick="changePage(${currentPage + 1})">
+      paginationHTML += `<button class="pagination-button" onclick="changePage(${
+        currentPage + 1
+      })">
                             <i class="bx bx-right-arrow-alt"></i>
                          </button>`;
     }
@@ -135,7 +139,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("pagination-buttons").innerHTML = paginationHTML;
 
     // Tampilkan teks "Page X of Y"
-    document.getElementById("pagination-info").innerHTML = `Page ${currentPage} of ${pageCount}`;
+    document.getElementById(
+      "pagination-info"
+    ).innerHTML = `Page ${currentPage} of ${pageCount}`;
   }
 
   // Add functions to window object to make them accessible globally
