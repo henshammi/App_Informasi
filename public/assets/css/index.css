@@ -120,6 +120,7 @@ button:hover {
     font-size: 14px;
   }
 }
+
 /* Modal Styling */
 .modal {
   display: none; /* Hidden by default */
@@ -157,6 +158,7 @@ button:hover {
   cursor: pointer;
 }
 
+/* style button */
 button {
   padding: 10px 20px;
   margin: 10px;

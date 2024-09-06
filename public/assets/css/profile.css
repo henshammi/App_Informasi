@@ -1,5 +1,7 @@
+/* import font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
 
+/* style keseluruhan halaman */
 * {
   margin: 0;
   padding: 20;
@@ -13,6 +15,7 @@ body {
   color: #333;
 }
 
+/* style container (pembungkus) */
 .profile-section {
   width: 100%;
   height: 100vh;
@@ -41,6 +44,7 @@ body {
   gap: 20px;
 }
 
+/* style foto */
 .image {
   position: relative;
   height: 150px;
@@ -56,6 +60,7 @@ body {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* style data / isi profile */
 .data {
   display: flex;
   flex-direction: column;
@@ -63,17 +68,14 @@ body {
   margin-top: 15px;
 }
 
+/* style text variant h2 */
 .data h2 {
   font-size: 33px;
   font-weight: 600;
-  color: black;
+  color: #b764c5;
 }
 
-.data span {
-  font-size: 18px;
-  color: #777;
-}
-
+/* style text */
 .row {
   display: flex;
   align-items: center;
@@ -93,28 +95,7 @@ body {
 .row .info span {
   display: block;
   font-size: 18px;
-  color: black;
-}
-
-.buttons {
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
-}
-
-.buttons .btn {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 20px;
-  padding: 8px 25px;
-  border-radius: 25px;
-  font-size: 18px;
-  white-space: nowrap;
-  background: linear-gradient(to left, #33ccff 0%, #ff99cc 100%);
-}
-
-.buttons .btn:hover {
-  box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.4);
+  color: #b764c5;
 }
 
 @media (max-width: 768px) {
@@ -128,6 +109,7 @@ body {
   }
 }
 
+/* style footer copyright */
 footer {
   background-color: #11101d;
   color: white;

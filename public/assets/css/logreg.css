@@ -1,17 +1,24 @@
+/* import font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* style keseluruhan halaman */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 body {
   background: linear-gradient(90deg, #8e1d9e, #b764c5);
   overflow: hidden;
 }
+
 ::selection {
   background: rgba(26, 188, 156, 0.3);
 }
+
+/* style container (pembungkus form) */
 .container {
   max-width: 440px;
   padding: 0 20px;
@@ -57,6 +64,8 @@ body {
   font-size: 16px;
   transition: all 0.3s ease;
 }
+
+/* style form */
 form .row input:focus {
   border-color: #11101d;
 
@@ -114,7 +123,7 @@ form .signup-link a:hover {
   text-decoration: underline;
 }
 
-/* notifikasi */
+/* style notifikasi */
 .notification {
   position: fixed;
   top: 20px;

@@ -1,7 +1,7 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
   background: linear-gradient(90deg, #3a3750, #7e4ca4);
 }
 

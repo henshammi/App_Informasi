@@ -55,6 +55,7 @@ button:hover {
   background-color: #218838;
 }
 
+/* style button cetak */
 .btn-cetak {
   justify-content: flex-end;
   display: flex;

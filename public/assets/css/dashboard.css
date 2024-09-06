@@ -1,3 +1,4 @@
+/* font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap");
 
 /* tabel */
@@ -10,7 +11,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  /* border: 2px solid #333; */
 }
 
 th,
@@ -41,8 +41,6 @@ th {
 }
 
 /* sidebar */
-/* Google Font Link */
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"); */
 * {
   margin: 0;
   padding: 0;
@@ -296,6 +294,7 @@ th {
   width: calc(100% - 250px);
 }
 
+/* bagian di sebelah sidebar */
 .home-section .text {
   display: inline-block;
   color: #11101d;
@@ -308,15 +307,6 @@ th {
   .sidebar li .tooltip {
     display: none;
   }
-}
-
-.container-box {
-  background: #fff;
-  padding: 50px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: calc(100% - 78px);
-  margin-bottom: 50px;
 }
 
 .sidebar li .tooltip-logout {
@@ -347,6 +337,17 @@ th {
   display: none;
 }
 
+/* container  */
+.container-box {
+  background: #fff;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 78px);
+  margin-bottom: 50px;
+}
+
+/* tombol next page (pagination) */
 #pagination {
   display: flex;
   justify-content: space-between;
@@ -383,40 +384,39 @@ th {
   cursor: not-allowed;
 }
 
-/* Notification styling */
+/* Notifikasi styling */
 .notification {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: auto; /* Adjust as needed */
+  width: auto;
   max-width: 300px;
   padding: 15px;
   border-radius: 8px;
   color: white;
   text-align: center;
-  opacity: 0; /* Initially hidden */
-  transform: translateX(100%); /* Awalnya berada sedikit di atas */
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Transition for animation */
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .notification.success {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
 }
 
 .notification.error {
-  background-color: #f44336; /* Red */
+  background-color: #f44336;
 }
 
-/* Animation for showing notification */
+/* Animasi notification */
 .notification.show {
-  opacity: 1; /* Make visible */
-  transform: translateX(0); /* Move into view */
+  opacity: 1;
+  transform: translateX(0);
 }
 
-/* Animation for hiding notification */
 .notification.hide {
-  opacity: 0; /* Hide */
-  transform: translateX(100%); /* Move out of view */
+  opacity: 0;
+  transform: translateX(100%);
 }
 
 /* notif login */
@@ -453,6 +453,7 @@ th {
   transform: translateX(0);
 }
 
+/* container grafik */
 .container-grafik {
   display: flex;
   padding-top: 20px;
@@ -505,10 +506,12 @@ button:active {
   transform: scale(0.98);
 }
 
+/* canvas grafik */
 canvas {
   padding-top: 30px;
 }
 
+/* footer (copyright) */
 footer {
   background-color: #11101d;
   color: white;
