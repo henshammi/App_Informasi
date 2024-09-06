@@ -1,8 +1,8 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap"); */
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px;
-  padding-top: 50px;
-  background: linear-gradient(45deg, #3a3750, #7e4ca4);
+  background: linear-gradient(90deg, #3a3750, #7e4ca4);
 }
 
 .container {
@@ -11,6 +11,8 @@ body {
   background: #ffffff;
   padding: 50px;
   padding-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -200,4 +202,11 @@ img {
 /* Tampilkan kotak informasi saat dihover */
 .info-icon:hover .info-box {
   display: block;
+}
+
+footer {
+  color: white;
+  text-align: center;
+  width: 100%;
+  z-index: 2;
 }
