@@ -178,6 +178,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     confirmYesButton.onclick = async () => {
       modal.style.display = "none";
+      // Tampilkan loading sebelum proses penghapusan
+      document.getElementById("loading").style.display = "flex";
+
       try {
         const response = await fetch(`https://serverbapokbeta.vercel.app/items/${itemId}`, {
           method: "DELETE",
@@ -194,6 +197,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch (error) {
         showNotification("Terjadi kesalahan saat menghapus item", "error");
         console.error("Error deleting item:", error);
+      } finally {
+        // Sembunyikan loading setelah proses penghapusan selesai
+        document.getElementById("loading").style.display = "none";
       }
     };
 
