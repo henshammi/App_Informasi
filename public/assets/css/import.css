@@ -48,6 +48,9 @@
   width: 80%;
   max-width: 400px;
   text-align: center;
+  top: 35%;
+  left: 39%;
+  position: fixed;
 }
 
 .modal-content p {

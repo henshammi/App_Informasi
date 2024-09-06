@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/dashboard.css" />
-    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <title>Grafik Rata-rata Harga Bahan Pokok</title>
   </head>
   <body>
@@ -91,7 +94,12 @@
           <input type="month" id="bulanB" name="bulanB" required />
 
           <label for="bahanBaku">Pilih Bahan Baku:</label>
-          <select class="bhn_baku" id="bahanBaku" name="bahanBaku" required></select>
+          <select
+            class="bhn_baku"
+            id="bahanBaku"
+            name="bahanBaku"
+            required
+          ></select>
 
           <button type="submit">Tampilkan Grafik</button>
         </form>
@@ -99,6 +107,13 @@
         <canvas id="hargaChart"></canvas>
       </div>
     </section>
+
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Alba & Sam. All Rights Reserved.</p>
+      </div>
+    </footer>
+
     <script>
       const userId = localStorage.getItem("userId");
       const userName = localStorage.getItem("userName");

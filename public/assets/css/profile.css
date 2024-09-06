@@ -127,3 +127,29 @@ body {
     width: 100%;
   }
 }
+
+footer {
+  background-color: #11101d;
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - 78px);
+  left: 78px;
+  z-index: 2;
+  transition: all 0.5s ease;
+}
+
+.sidebar.open ~ footer {
+  width: calc(100% - 250px);
+  left: 250px;
+}
+
+.footer-content a {
+  color: #a74d9d;
+  text-decoration: none;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
