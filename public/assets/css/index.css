@@ -134,13 +134,16 @@ button:hover {
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
+  background-color: white;
   padding: 20px;
-  border: 1px solid #888;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 80%;
-  max-width: 500px;
+  max-width: 400px;
   text-align: center;
+  top: 35%;
+  left: 39%;
+  position: fixed;
 }
 
 .close {
