@@ -1,115 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Mengatur karakter encoding yang digunakan oleh dokumen ini -->
     <meta charset="UTF-8" />
+
+    <!-- Mengatur viewport untuk memastikan tampilan web responsif pada perangkat mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Menyertakan file CSS eksternal untuk menerapkan gaya pada halaman -->
     <link rel="stylesheet" href="./assets/css/dashboard.css" />
+
+    <!-- Menyertakan CDN untuk Boxicons, yaitu ikon yang digunakan di halaman ini -->
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
       rel="stylesheet"
     />
+
+    <!-- Menyediakan judul halaman yang akan muncul di tab browser -->
     <title>Grafik Rata-rata Harga Bahan Pokok</title>
   </head>
+
   <body>
     <!-- sidebar -->
     <div class="sidebar">
+      <!-- Bagian logo dan tombol menu -->
       <div class="logo-details">
+        <!-- Ikon data dari Boxicons -->
         <i class="bx bx-data icon"></i>
+        <!-- Nama aplikasi yang ditampilkan di sidebar -->
         <div class="logo_name">Fadil APP</div>
+        <!-- Tombol untuk membuka/menutup sidebar -->
         <i class="bx bx-menu" id="btn"></i>
       </div>
+
+      <!-- Daftar navigasi dalam sidebar -->
       <ul class="nav-list">
+        <!-- Item navigasi ke halaman dashboard -->
         <li>
           <a href="index.html">
+            <!-- Ikon grid dari Boxicons -->
             <i class="bx bx-grid-alt"></i>
+            <!-- Teks link yang muncul di sidebar -->
             <span class="links_name">Dashboard</span>
           </a>
+          <!-- Tooltip yang muncul saat hover di atas link -->
           <span class="tooltip">Dashboard</span>
         </li>
+
+        <!-- Item navigasi ke halaman profil -->
         <li>
           <a href="profile.html">
+            <!-- Ikon user dari Boxicons -->
             <i class="bx bx-user"></i>
+            <!-- Teks link untuk profil -->
             <span class="links_name">Profile</span>
           </a>
+          <!-- Tooltip untuk profil -->
           <span class="tooltip">Profile</span>
         </li>
+
+        <!-- Item navigasi ke halaman input data bahan pokok -->
         <li>
           <a href="inputData.html">
+            <!-- Ikon plus-circle dari Boxicons -->
             <i class="bx bx-plus-circle"></i>
+            <!-- Teks link untuk input bahan pokok -->
             <span class="links_name">Input Bahan Pokok</span>
           </a>
+          <!-- Tooltip untuk input bahan pokok -->
           <span class="tooltip">Input Bahan Pokok</span>
         </li>
+
+        <!-- Item navigasi ke halaman grafik -->
         <li>
           <a href="grafik.html">
+            <!-- Ikon bar-chart dari Boxicons -->
             <i class="bx bx-bar-chart-alt-2"></i>
+            <!-- Teks link untuk grafik -->
             <span class="links_name">Grafik</span>
           </a>
+          <!-- Tooltip untuk grafik -->
           <span class="tooltip">Grafik</span>
         </li>
+
+        <!-- Item navigasi ke halaman grafik laporan -->
         <li>
           <a href="grafiklap.html">
+            <!-- Ikon chart dari Boxicons -->
             <i class="bx bx-chart"></i>
+            <!-- Teks link untuk grafik laporan -->
             <span class="links_name">Grafik Laporan</span>
           </a>
+          <!-- Tooltip untuk grafik laporan -->
           <span class="tooltip">Grafik Laporan</span>
         </li>
+
+        <!-- Item navigasi ke halaman import data -->
         <li>
           <a href="importData.html">
+            <!-- Ikon upload dari Boxicons -->
             <i class="bx bx-upload"></i>
+            <!-- Teks link untuk import data -->
             <span class="links_name">Import Data</span>
           </a>
+          <!-- Tooltip untuk import data -->
           <span class="tooltip">Import Data</span>
         </li>
+
+        <!-- Item navigasi ke halaman laporan -->
         <li>
           <a href="laporan.html">
+            <!-- Ikon file dari Boxicons -->
             <i class="bx bx-file"></i>
+            <!-- Teks link untuk laporan -->
             <span class="links_name">Laporan</span>
           </a>
+          <!-- Tooltip untuk laporan -->
           <span class="tooltip">Laporan</span>
         </li>
+
+        <!-- Profil pengguna dan tombol logout -->
         <li class="profile">
           <div class="profile-details">
-            <!-- fotonya tar disini -->
+            <!-- Gambar profil pengguna -->
             <img src="./assets/profile.jpg" alt="profileImg" />
+            <!-- Nama dan pekerjaan pengguna -->
             <div class="name_job">
               <div class="name"><span id="userId"></span></div>
               <div class="job"><span id="userName"></span></div>
             </div>
           </div>
+          <!-- Tombol logout -->
           <i class="bx bx-log-out" id="log_out"></i>
+          <!-- Tooltip untuk logout -->
           <span class="tooltip-logout">Logout</span>
         </li>
       </ul>
     </div>
 
     <section class="home-section">
+      <!-- Container utama yang membungkus seluruh konten -->
       <div class="container-box">
+        <!-- Judul atau teks utama di bagian atas grafik -->
         <div class="text">Grafik Rata-rata Harga Bahan Pokok</div>
+
+        <!-- Formulir untuk memilih periode waktu dan bahan baku untuk menampilkan grafik -->
         <form id="grafikForm" class="container-grafik">
+          <!-- Label dan input untuk memilih bulan awal -->
           <label for="bulanA">Bulan Mulai:</label>
           <input type="month" id="bulanA" name="bulanA" required />
 
+          <!-- Label dan input untuk memilih bulan akhir -->
           <label for="bulanB">Bulan Akhir:</label>
           <input type="month" id="bulanB" name="bulanB" required />
 
+          <!-- Label dan dropdown untuk memilih bahan baku -->
           <label for="bahanBaku">Pilih Bahan Baku:</label>
-          <select
-            class="bhn_baku"
-            id="bahanBaku"
-            name="bahanBaku"
-            required
-          ></select>
+          <select class="bhn_baku" id="bahanBaku" name="bahanBaku" required>
+            <!-- Opsi bahan baku akan ditambahkan di sini secara dinamis -->
+          </select>
 
+          <!-- Tombol untuk mengirim formulir dan menampilkan grafik -->
           <button type="submit">Tampilkan Grafik</button>
         </form>
 
+        <!-- Elemen canvas di mana grafik akan digambar -->
         <canvas id="hargaChart"></canvas>
       </div>
     </section>
 
     <footer>
+      <!-- Kontainer utama untuk konten footer -->
       <div class="footer-content">
+        <!-- Paragraf yang menampilkan hak cipta -->
         <p>&copy; 2024 Alba & Sam. All Rights Reserved.</p>
       </div>
     </footer>

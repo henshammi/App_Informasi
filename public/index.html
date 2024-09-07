@@ -15,80 +15,145 @@
   <body>
     <!-- sidebar -->
     <div class="sidebar">
+      <!-- logo and menu toggle -->
       <div class="logo-details">
         <i class="bx bx-data icon"></i>
+        <!-- Menampilkan ikon aplikasi -->
         <div class="logo_name">Fadil APP</div>
+        <!-- Menampilkan nama aplikasi -->
         <i class="bx bx-menu" id="btn"></i>
+        <!-- Tombol untuk membuka/menutup sidebar -->
       </div>
+
+      <!-- navigation list -->
       <ul class="nav-list">
+        <!-- Dashboard link -->
         <li>
           <a href="index.html">
+            <!-- Tautan ke halaman Dashboard -->
             <i class="bx bx-grid-alt"></i>
+            <!-- Ikon Dashboard -->
             <span class="links_name">Dashboard</span>
+            <!-- Nama link Dashboard -->
           </a>
           <span class="tooltip">Dashboard</span>
+          <!-- Tooltip saat hover -->
         </li>
+
+        <!-- Profile link -->
         <li>
           <a href="profile.html">
+            <!-- Tautan ke halaman Profile -->
             <i class="bx bx-user"></i>
+            <!-- Ikon Profile -->
             <span class="links_name">Profile</span>
+            <!-- Nama link Profile -->
           </a>
           <span class="tooltip">Profile</span>
+          <!-- Tooltip saat hover -->
         </li>
+
+        <!-- Input Bahan Pokok link -->
         <li>
           <a href="inputData.html">
+            <!-- Tautan ke halaman Input Bahan Pokok -->
             <i class="bx bx-plus-circle"></i>
+            <!-- Ikon Input Bahan Pokok -->
             <span class="links_name">Input Bahan Pokok</span>
+            <!-- Nama link Input Bahan Pokok -->
           </a>
           <span class="tooltip">Input Bahan Pokok</span>
+          <!-- Tooltip saat hover -->
         </li>
+
+        <!-- Grafik link -->
         <li>
           <a href="grafik.html">
+            <!-- Tautan ke halaman Grafik -->
             <i class="bx bx-bar-chart-alt-2"></i>
+            <!-- Ikon Grafik -->
             <span class="links_name">Grafik</span>
+            <!-- Nama link Grafik -->
           </a>
           <span class="tooltip">Grafik</span>
+          <!-- Tooltip saat hover -->
         </li>
+
+        <!-- Grafik Laporan link -->
         <li>
           <a href="grafiklap.html">
+            <!-- Tautan ke halaman Grafik Laporan -->
             <i class="bx bx-chart"></i>
+            <!-- Ikon Grafik Laporan -->
             <span class="links_name">Grafik Laporan</span>
+            <!-- Nama link Grafik Laporan -->
           </a>
           <span class="tooltip">Grafik Laporan</span>
+          <!-- Tooltip saat hover -->
         </li>
+
+        <!-- Import Data link -->
         <li>
           <a href="importData.html">
+            <!-- Tautan ke halaman Import Data -->
             <i class="bx bx-upload"></i>
+            <!-- Ikon Import Data -->
             <span class="links_name">Import Data</span>
+            <!-- Nama link Import Data -->
           </a>
           <span class="tooltip">Import Data</span>
+          <!-- Tooltip saat hover -->
         </li>
+
+        <!-- Laporan link -->
         <li>
           <a href="laporan.html">
+            <!-- Tautan ke halaman Laporan -->
             <i class="bx bx-file"></i>
+            <!-- Ikon Laporan -->
             <span class="links_name">Laporan</span>
+            <!-- Nama link Laporan -->
           </a>
           <span class="tooltip">Laporan</span>
+          <!-- Tooltip saat hover -->
         </li>
+
+        <!-- Profile section -->
         <li class="profile">
           <div class="profile-details">
+            <!-- Profile picture -->
             <img src="./assets/profile.jpg" alt="profileImg" />
+            <!-- Gambar profil pengguna -->
             <div class="name_job">
+              <!-- User ID -->
               <div class="name"><span id="userId"></span></div>
+              <!-- Tempat untuk menampilkan ID pengguna -->
+              <!-- User Name -->
               <div class="job"><span id="userName"></span></div>
+              <!-- Tempat untuk menampilkan Nama pengguna -->
             </div>
           </div>
+          <!-- Logout button -->
           <i class="bx bx-log-out" id="log_out"></i>
+          <!-- Ikon untuk logout -->
           <span class="tooltip-logout">Logout</span>
+          <!-- Tooltip saat hover pada tombol logout -->
         </li>
       </ul>
     </div>
 
     <section class="home-section">
+      <!-- Notification Area for notifications -->
       <div id="notification2" class="notification2 hidden"></div>
+      <!-- Area untuk notifikasi tambahan -->
 
+      <!-- Container Box for main content -->
       <div class="container-box">
+        <!-- Section Title -->
         <div class="text">Daftar Bahan Pokok</div>
+        <!-- Judul bagian daftar bahan pokok -->
+
+        <!-- Search Bar for filtering items -->
         <input
           class="searchbar"
           type="text"
@@ -96,7 +161,9 @@
           placeholder="Cari berdasarkan nama..."
           onkeyup="filterItems()"
         />
+        <!-- Input untuk pencarian bahan pokok berdasarkan nama -->
 
+        <!-- Price Filter -->
         <div>
           <label for="priceFilter">Filter Harga:</label>
           <input
@@ -105,6 +172,7 @@
             placeholder="Harga Minimum"
             onkeyup="filterItems()"
           />
+          <!-- Input untuk harga minimum -->
           -
           <input
             type="number"
@@ -112,49 +180,77 @@
             placeholder="Harga Maksimum"
             onkeyup="filterItems()"
           />
+          <!-- Input untuk harga maksimum -->
         </div>
 
+        <!-- Date Filter -->
         <div>
           <label for="dateFilter">Filter Tanggal:</label>
           <input type="date" id="startDate" onchange="filterItems()" />
+          <!-- Input untuk tanggal mulai -->
           -
           <input type="date" id="endDate" onchange="filterItems()" />
+          <!-- Input untuk tanggal akhir -->
         </div>
-        <!-- tabel -->
+
+        <!-- Table for displaying items -->
         <div class="table-container">
           <table id="bahanTable">
             <thead>
               <tr>
                 <th>No</th>
+                <!-- Kolom nomor -->
                 <th>Nama Bahan Pokok</th>
+                <!-- Kolom nama bahan pokok -->
                 <th>Harga Bahan Pokok</th>
+                <!-- Kolom harga bahan pokok -->
                 <th>Tanggal</th>
+                <!-- Kolom tanggal -->
                 <th>Gambar</th>
+                <!-- Kolom gambar -->
                 <th>Aksi</th>
+                <!-- Kolom aksi -->
               </tr>
             </thead>
             <tbody id="bahanBody"></tbody>
+            <!-- Tempat untuk baris data tabel -->
           </table>
         </div>
+
+        <!-- Notification Area for general notifications -->
         <div id="notification" class="notification" style="display: none"></div>
+        <!-- Area untuk notifikasi umum -->
+
+        <!-- Pagination Controls -->
         <div id="pagination">
           <div id="pagination-buttons"></div>
+          <!-- Tempat untuk tombol pagination -->
           <div id="pagination-info"></div>
+          <!-- Tempat untuk informasi pagination -->
         </div>
       </div>
+
+      <!-- Confirmation Modal -->
       <div id="confirmModal" class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
+          <!-- Tombol untuk menutup modal -->
           <p>Apakah Anda yakin ingin menghapus item ini?</p>
+          <!-- Pesan konfirmasi -->
           <button id="confirmYes">Yes</button>
+          <!-- Tombol untuk mengonfirmasi penghapusan -->
           <button id="confirmNo">No</button>
+          <!-- Tombol untuk membatalkan penghapusan -->
         </div>
       </div>
     </section>
 
     <footer>
+      <!-- Konten Footer -->
       <div class="footer-content">
+        <!-- Pesan Hak Cipta -->
         <p>&copy; 2024 Alba & Sam. All Rights Reserved.</p>
+        <!-- Menampilkan pesan hak cipta -->
       </div>
     </footer>
 
