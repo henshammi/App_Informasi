@@ -101,20 +101,46 @@ function setupPagination() {
   const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
   let paginationHTML = "";
 
-  for (let i = 1; i <= pageCount; i++) {
-    paginationHTML += `<button class="pagination-button ${
-      i === currentPage ? "disabled" : ""
-    }" onclick="changePage(${i})">${i}</button>`;
+  // Tombol ke halaman pertama
+  if (currentPage > 1) {
+    paginationHTML += `<button class="pagination-button" onclick="changePage(1)">
+                         <i class="fas fa-angle-double-left"></i> First
+                       </button>`;
   }
 
-  document.getElementById("pagination").innerHTML = paginationHTML;
+  // Tombol previous
+  if (currentPage > 1) {
+    paginationHTML += `<button class="pagination-button" onclick="changePage(${currentPage - 1})">
+                          <i class="bx bx-left-arrow-alt"></i>
+                       </button>`;
+  }
+
+  // Tombol next
+  if (currentPage < pageCount) {
+    paginationHTML += `<button class="pagination-button" onclick="changePage(${currentPage + 1})">
+                          <i class="bx bx-right-arrow-alt"></i>
+                       </button>`;
+  }
+
+  // Tombol ke halaman terakhir
+  if (currentPage < pageCount) {
+    paginationHTML += `<button class="pagination-button" onclick="changePage(${pageCount})">
+                         Last <i class="fas fa-angle-double-right"></i>
+                       </button>`;
+  }
+
+  document.getElementById("pagination-buttons").innerHTML = paginationHTML;
+
+  // Tampilkan teks "Page X of Y"
+  document.getElementById("pagination-info").innerHTML = `Page ${currentPage} of ${pageCount}`;
 }
 
-function changePage(pageNumber) {
+// Add functions to window object to make them accessible globally
+window.changePage = function (pageNumber) {
   currentPage = pageNumber;
   displayItems();
   setupPagination();
-}
+};
 
 function searchItems() {
   const searchTerm = document.getElementById("searchInput").value.toLowerCase();

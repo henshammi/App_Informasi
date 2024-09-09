@@ -113,18 +113,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Tombol previous
     if (currentPage > 1) {
-      paginationHTML += `<button class="pagination-button" onclick="changePage(${
-        currentPage - 1
-      })">
+      paginationHTML += `<button class="pagination-button" onclick="changePage(${currentPage - 1})">
                             <i class="bx bx-left-arrow-alt"></i>
                          </button>`;
     }
 
     // Tombol next
     if (currentPage < pageCount) {
-      paginationHTML += `<button class="pagination-button" onclick="changePage(${
-        currentPage + 1
-      })">
+      paginationHTML += `<button class="pagination-button" onclick="changePage(${currentPage + 1})">
                             <i class="bx bx-right-arrow-alt"></i>
                          </button>`;
     }
@@ -139,9 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("pagination-buttons").innerHTML = paginationHTML;
 
     // Tampilkan teks "Page X of Y"
-    document.getElementById(
-      "pagination-info"
-    ).innerHTML = `Page ${currentPage} of ${pageCount}`;
+    document.getElementById("pagination-info").innerHTML = `Page ${currentPage} of ${pageCount}`;
   }
 
   // Add functions to window object to make them accessible globally
@@ -184,6 +178,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     confirmYesButton.onclick = async () => {
       modal.style.display = "none";
+      // Tampilkan loading sebelum proses penghapusan
+      document.getElementById("loading").style.display = "flex";
+
       try {
         const response = await fetch(`https://serverbapokbeta.vercel.app/items/${itemId}`, {
           method: "DELETE",
@@ -200,6 +197,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       } catch (error) {
         showNotification("Terjadi kesalahan saat menghapus item", "error");
         console.error("Error deleting item:", error);
+      } finally {
+        // Sembunyikan loading setelah proses penghapusan selesai
+        document.getElementById("loading").style.display = "none";
       }
     };
 

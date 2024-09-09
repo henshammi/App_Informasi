@@ -141,20 +141,31 @@ button#cancelBtn {
   z-index: 9999;
 }
 
+/* HTML: <div class="loader"></div> */
 .spinner {
-  border: 8px solid #f3f3f3; /* Light grey */
-  border-top: 8px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
+  height: 45px;
+  --c: no-repeat linear-gradient(#514b82 0 0);
+  background: var(--c) left, var(--c) center, var(--c) right;
+  background-size: 16px 100%;
+  animation: l33-1 1.5s infinite, l33-2 1.5s infinite;
 }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
+@keyframes l33-1 {
+  0%,
   100% {
-    transform: rotate(360deg);
+    width: 45px;
+  }
+  35%,
+  65% {
+    width: 65px;
+  }
+}
+@keyframes l33-2 {
+  0%,
+  40% {
+    transform: rotate(0);
+  }
+  60%,
+  100% {
+    transform: rotate(90deg);
   }
 }
